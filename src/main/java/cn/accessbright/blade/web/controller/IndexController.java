@@ -1,4 +1,4 @@
-package cn.accessbright.blade.web;
+package cn.accessbright.blade.web.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,6 @@ import cn.accessbright.blade.domain.Person;
 
 @Controller
 public class IndexController {
-
 	@RequestMapping("/")
 	private String index(Model model) {
 		Person single = new Person("aa", 11);

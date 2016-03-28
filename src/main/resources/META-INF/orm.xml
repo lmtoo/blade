@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd">
+	<table-generator name="city_key_generator" table="table_generators" initial-value="1" allocation-size="20" pk-column-name="key_name" pk-column-value="city_key"
+		value-column-name="val" />
+
+	<table-generator name="user_key_generator" table="table_generators" initial-value="1" allocation-size="10" pk-column-name="key_name" pk-column-value="city_key"
+		value-column-name="val" />
+
+	<named-query name="findAllCitys">
+		<query>select t from City t</query>
+	</named-query>
+	<named-query name="findCityByName">
+		<query>select t from City t where t.name=:name</query>
+	</named-query>
+</entity-mappings>
