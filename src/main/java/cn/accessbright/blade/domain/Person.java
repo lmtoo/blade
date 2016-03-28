@@ -1,5 +1,8 @@
 package cn.accessbright.blade.domain;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Person {
 	private String name;
 	private Integer age;
