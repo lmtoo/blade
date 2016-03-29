@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
@@ -29,7 +30,7 @@ public class User extends AbstractAuditable<User, Integer> {
 
 	private String email;
 
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	private List<Role> roles;
 
 	private boolean isInternal;// 是否为内部人员，内部系统管理员不能被删除
