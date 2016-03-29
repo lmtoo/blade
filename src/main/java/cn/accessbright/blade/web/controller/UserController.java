@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.accessbright.blade.domain.User;
+import cn.accessbright.blade.domain.system.User;
 import cn.accessbright.blade.repository.UserRepository;
 
 @RestController

@@ -1,9 +1,19 @@
 package cn.accessbright.blade.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
 
-import cn.accessbright.blade.domain.User;
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.EntityGraph.EntityGraphType;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface UserRepository extends CrudRepository<User, Integer> {
+import cn.accessbright.blade.domain.system.Role;
+import cn.accessbright.blade.domain.system.User;
 
+public interface UserRepository extends PagingAndSortingRepository<User, Integer> {
+	User findUserByUsername(String username);
+
+	@Query("select u.roles from User u where u.username=:username")
+	@EntityGraph(attributePaths = { "roles.menus", "roles.funcs" }, type = EntityGraphType.LOAD)
+	List<Role> findRolesByUsername(String username);
 }
