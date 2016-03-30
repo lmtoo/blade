@@ -30,10 +30,10 @@ public class User extends AbstractAuditable<User, Integer> {
 
 	private String email;
 
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Role> roles;
 
-	private boolean isInternal;// 是否为内部人员，内部系统管理员不能被删除
+	private boolean isInternal = false;// 是否为内部人员，内部系统管理员不能被删除
 
 	public String getUsername() {
 		return username;

@@ -1,4 +1,4 @@
-package cn.accessbright.blade.web;
+package cn.accessbright.blade.security.spring;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import cn.accessbright.blade.domain.system.SystemUserHolder;
 import cn.accessbright.blade.domain.system.User;
 import cn.accessbright.blade.repository.UserRepository;
 
@@ -26,13 +27,29 @@ public class JpaUserDetailsService implements UserDetailsService {
 	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findUserByUsername(username);
+		return new SystemUserHolderImpl(user);
+	}
 
-		List<GrantedAuthority> authorities = new ArrayList<>();
-		Set<String> roleNames = user.getRoleNames();
-		for (String roleName : roleNames) {
-			authorities.add(new SimpleGrantedAuthority(roleName));
+	private static class SystemUserHolderImpl extends org.springframework.security.core.userdetails.User implements SystemUserHolder {
+		private User user;
+
+		public SystemUserHolderImpl(User user) {
+			super(user.getUsername(), user.getPassword(), getGrantedAuthoritis(user));
+			this.user = user;
 		}
 
-		return new org.springframework.security.core.userdetails.User(username, user.getPassword(), authorities);
+		private static List<GrantedAuthority> getGrantedAuthoritis(User user) {
+			List<GrantedAuthority> authorities = new ArrayList<>();
+			Set<String> roleNames = user.getRoleNames();
+			for (String roleName : roleNames) {
+				authorities.add(new SimpleGrantedAuthority(roleName));
+			}
+			return authorities;
+		}
+
+		@Override
+		public User getSystemUser() {
+			return this.user;
+		}
 	}
 }
