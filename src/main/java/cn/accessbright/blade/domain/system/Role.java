@@ -2,13 +2,12 @@ package cn.accessbright.blade.domain.system;
 
 import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.springframework.data.jpa.domain.AbstractAuditable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -16,7 +15,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "t_roles")
+@Table(name = "t_sys_roles")
 @EntityListeners(AuditingEntityListener.class)
 public class Role extends AbstractAuditable<User, Integer> {
 	private String name;
@@ -25,8 +24,9 @@ public class Role extends AbstractAuditable<User, Integer> {
 	@ManyToMany(mappedBy = "roles")
 	private Set<User> users;
 
-	@OneToMany(mappedBy = "role",fetch=FetchType.EAGER)
-	private Set<Permission> permissions;
+	@ElementCollection
+	@CollectionTable(name = "t_sys_roles_permissions")
+	private Set<String> permissions;
 
 	public String getName() {
 		return name;
@@ -44,21 +44,11 @@ public class Role extends AbstractAuditable<User, Integer> {
 		this.users = users;
 	}
 
-	public Set<Permission> getPermissions() {
+	public Set<String> getPermissions() {
 		return permissions;
 	}
 
-	public void setPermissions(Set<Permission> permissions) {
+	public void setPermissions(Set<String> permissions) {
 		this.permissions = permissions;
-	}
-
-	@Transient
-	public Set<String> getPermissionNames() {
-		Set<String> list = new java.util.HashSet<>();
-		Set<Permission> perlist = getPermissions();
-		for (Permission per : perlist) {
-			list.add(per.getName());
-		}
-		return list;
 	}
 }

@@ -1,0 +1,2 @@
+INSERT INTO t_sys_users(id,username,PASSWORD,email,internal,locked) VALUES(1,'admin','90ff35a58f9adfa8da6f84be6f68d0121653bc4a1cdb1680a71bd1b2c6296ddb117a90c9ca408a7a','601235723@qq.com',1,0);
+

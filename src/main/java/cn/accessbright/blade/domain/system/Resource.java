@@ -2,17 +2,19 @@ package cn.accessbright.blade.domain.system;
 
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.jpa.domain.AbstractAuditable;
 
 @MappedSuperclass
 public class Resource extends AbstractAuditable<User, Integer> {
-
+	@NotNull(message = "资源名称不能为空！")
 	private String name;
-	
+
 	@ManyToOne
 	private Menu parent;
 
+	@NotNull(message = "资源的权限不能为空！")
 	private String permission;// 资源的权限
 
 	private String description;

@@ -7,9 +7,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "t_menu")
+@Table(name = "t_sys_menu")
 public class Menu extends Resource {
-
 	private String url;
 
 	@OneToMany(mappedBy = "parent")

@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "t_func")
+@Table(name = "t_sys_func")
 public class Func extends Resource {
 
 	private String icon;
