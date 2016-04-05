@@ -38,8 +38,10 @@
 	
 			<div sec:authorize="hasRole('ROLE_USRE')">
 				<p class="bg-info">无更多信息</p>
-			</div>		
-			
+			</div>
+			Logged user: <span sec:authentication="name"></span>
+			Roles: <span sec:authentication="principal.authorities"></span>
+
 			<form name="form" action="/logout" method="post">
 				<input type="submit" value="注销" class="btn btn-primary"/>
 			</form>

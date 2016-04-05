@@ -14,12 +14,6 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/login").setViewName("login");
-	}
-
-	@Bean(name="multipartResolver")
-	public MultipartResolver multipartResolver() {
-		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-		multipartResolver.setMaxUploadSize(1000000);
-		return multipartResolver;
+		registry.addViewController("/toUpload").setViewName("upload");
 	}
 }

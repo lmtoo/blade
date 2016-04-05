@@ -8,8 +8,8 @@ import cn.accessbright.blade.domain.system.Menu;
 
 public interface MenuRepository extends PagingAndSortingRepository<Menu, Integer> {
 	
-//	List<Menu> findByParentId(String parentId);
-//
-//	// 查找一级菜单
-//	List<Menu> findByParentIsNull();
+	List<Menu> findByParentId(String parentId);
+
+	// 查找一级菜单
+	List<Menu> findByParentIsNull();
 }

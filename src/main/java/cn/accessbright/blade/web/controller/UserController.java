@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import cn.accessbright.blade.domain.system.User;
 import cn.accessbright.blade.repository.UserRepository;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -19,6 +21,13 @@ public class UserController {
 		User user = new User();
 		user.setUsername("lmt");
 		user.setPassword("60123");
+		user.setActiveCode(UUID.randomUUID().toString());
+
 		return repository.save(user);
+	}
+
+	@RequestMapping("/findByActiveCode")
+	public User findByUUID(String activeCode){
+		return repository.findByActiveCode(activeCode);
 	}
 }

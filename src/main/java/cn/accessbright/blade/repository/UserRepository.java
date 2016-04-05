@@ -19,21 +19,21 @@ public interface UserRepository extends PagingAndSortingRepository<User, Integer
 	 * @param credential
 	 * @return
 	 */
-//	@Query("select u from User u where u.username=:credential or u.email=:credential or u.phone=:credential")
-//	User findByCredential(@Param("credential") String credential);
+	@Query("select u from User u where u.username=:credential or u.email=:credential or u.phone=:credential")
+	User findByCredential(@Param("credential") String credential);
 
 	User findByUsername(String username);
 
 	@Query("select u.roles from User u where u.username=:username")
 	@EntityGraph(attributePaths = "roles.permissions", type = EntityGraphType.FETCH)
 	List<Role> findRolesByUsername(String username);
-//
-//	User findByActiveCode(UUID activeCode);
 
-//	/**
-//	 * 查找所有的内部用户
-//	 * 
-//	 * @return
-//	 */
-//	List<User> findByInternalTrue();
+	User findByActiveCode(String activeCode);
+
+	/**
+	 * 查找所有的内部用户
+	 *
+	 * @return
+	 */
+	List<User> findByInternalTrue();
 }
