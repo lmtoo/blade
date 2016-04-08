@@ -5,7 +5,10 @@
 	<groupId>cn.accessbright.blade</groupId>
 	<artifactId>blade-core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<modules>
+		<module>netty-test</module>
+	</modules>
+	<packaging>pom</packaging>
 
 	<name>Blade Core</name>
 	<description>Demo project for Spring Boot</description>
