@@ -19,7 +19,6 @@ public class HomeController {
 
     @RequestMapping(value = {"/", "/index"})
     public String index(Model model) {
-
         List<Menu> firstLevelMenus = menuRepository.findByParentIsNull();
 
         model.addAttribute("firstLevelMenus", firstLevelMenus);

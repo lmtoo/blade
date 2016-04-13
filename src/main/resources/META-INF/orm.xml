@@ -8,4 +8,6 @@
 	<table-generator name="chapter_progress_key_generator" table="table_generators" initial-value="1" allocation-size="10" pk-column-name="key_name" pk-column-value="chapter_progress_key"
 		value-column-name="val" />
 
+
+
 </entity-mappings>
