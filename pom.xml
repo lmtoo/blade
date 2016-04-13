@@ -142,17 +142,8 @@
 		</dependency>
 
 		<!-- shiro -->
-		<!-- <dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-spring</artifactId>
-			<version>${shiro.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-ehcache</artifactId>
-			<version>${shiro.version}</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.apache.shiro</groupId> <artifactId>shiro-spring</artifactId> <version>${shiro.version}</version> </dependency> <dependency> <groupId>org.apache.shiro</groupId> 
+			<artifactId>shiro-ehcache</artifactId> <version>${shiro.version}</version> </dependency> -->
 
 
 		<!--webjars resources -->
@@ -183,6 +174,16 @@
 
 	<build>
 		<finalName>blade</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+					<include>**/*.txt</include>
+				</includes>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

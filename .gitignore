@@ -2,4 +2,9 @@
 .classpath
 .project
 .settings/
+<<<<<<< HEAD
+.idea/
+*.impl
+=======
 /.idea/
+>>>>>>> 30777761c07355c0bf95c3487e4a11c9f49cfdd1

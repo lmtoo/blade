@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.EntityGraph.EntityGraphType;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -12,7 +14,7 @@ import org.springframework.data.repository.query.Param;
 import cn.accessbright.blade.domain.system.Role;
 import cn.accessbright.blade.domain.system.User;
 
-public interface UserRepository extends PagingAndSortingRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer>,JpaSpecificationExecutor<User> {
 	/**
 	 * 根据凭证查找用户，凭证包括用户名、邮箱、电话
 	 * 
