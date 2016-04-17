@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 /**
  * Created by Administrator on 2016/4/13.
  */
-@Component("cacheCaptchaHolder")
+//@Component("cacheCaptchaHolder")
 public class CacheCaptchaHolder implements CaptchaHolder {
 
     private CacheManager cacheManager;

@@ -1,6 +1,7 @@
 package cn.accessbright.blade.captcha;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -16,6 +17,7 @@ import java.util.UUID;
 public abstract class AbstractCaptchaService implements CaptchaService {
 
     @Autowired
+    @Qualifier("sessionCaptchaHolder")
     protected CaptchaHolder captchaHolder;
 
     protected int width = 80;
