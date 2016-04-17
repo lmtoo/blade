@@ -5,10 +5,8 @@
 	<groupId>cn.accessbright.blade</groupId>
 	<artifactId>blade-core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<modules>
-		<module>netty-test</module>
-	</modules>
-	<packaging>pom</packaging>
+
+	<packaging>war</packaging>
 
 	<name>Blade Core</name>
 	<description>Demo project for Spring Boot</description>
@@ -30,6 +28,12 @@
 	</properties>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>18.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -111,9 +115,16 @@
 		</dependency>
 
 		<!-- MYSQL -->
+		<!--<dependency>-->
+			<!--<groupId>mysql</groupId>-->
+			<!--<artifactId>mysql-connector-java</artifactId>-->
+		<!--</dependency>-->
+
+		<!--oracle-->
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
+			<groupId>com.oracle.driver</groupId>
+			<artifactId>jdbc-driver</artifactId>
+			<version>10.2.0.4.0</version>
 		</dependency>
 
 		<!-- Spring Boot JDBC -->
@@ -168,16 +179,6 @@
 
 	<build>
 		<finalName>blade</finalName>
-		<resources>
-			<resource>
-				<directory>src/main/java</directory>
-				<includes>
-					<include>**/*.xml</include>
-					<include>**/*.properties</include>
-					<include>**/*.txt</include>
-				</includes>
-			</resource>
-		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
