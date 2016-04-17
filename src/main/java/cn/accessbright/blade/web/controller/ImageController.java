@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.accessbright.blade.domain.Image;
-import cn.accessbright.blade.domain.Switch;
+import cn.accessbright.blade.domain.questions.Image;
 import cn.accessbright.blade.repository.ImageRepository;
 
 @RestController
@@ -27,7 +26,6 @@ public class ImageController {
 		Image image=new Image();
 		image.setName("123");
 		image.setUrl("http://www.baidu.com");
-		image.setStatus(Switch.ON);
 		return repository.save(image);
 	}
 }

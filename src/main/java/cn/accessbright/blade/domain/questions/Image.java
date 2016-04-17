@@ -1,4 +1,4 @@
-package cn.accessbright.blade.domain;
+package cn.accessbright.blade.domain.questions;
 
 import java.util.Date;
 
@@ -15,12 +15,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import cn.accessbright.blade.domain.system.User;
 
 @Entity
-@Table(name = "t_image")
+@Table(name = "t_images")
 @EntityListeners(AuditingEntityListener.class)
 public class Image extends AbstractAuditable<User, Integer> {
 	private String name;
 	private String url;
-	private Switch status;
+	private  Boolean available;
 
 	@ManyToOne
 	private User checkedBy;
@@ -44,12 +44,12 @@ public class Image extends AbstractAuditable<User, Integer> {
 		this.url = url;
 	}
 
-	public Switch getStatus() {
-		return status;
+	public Boolean getAvailable() {
+		return available;
 	}
 
-	public void setStatus(Switch status) {
-		this.status = status;
+	public void setAvailable(Boolean available) {
+		this.available = available;
 	}
 
 	public User getCheckedBy() {

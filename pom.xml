@@ -25,6 +25,7 @@
 		<bootstrap.version>3.3.6</bootstrap.version>
 		<druid.version>1.0.18</druid.version>
 		<shiro.version>1.2.4</shiro.version>
+		<kaptcha.version>2.3</kaptcha.version>
 	</properties>
 
 	<dependencies>
@@ -144,6 +145,13 @@
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.kaptcha</groupId>
+			<artifactId>kaptcha</artifactId>
+			<version>${kaptcha.version}</version>
+			<classifier>jdk15</classifier>
 		</dependency>
 
 		<!-- shiro -->
