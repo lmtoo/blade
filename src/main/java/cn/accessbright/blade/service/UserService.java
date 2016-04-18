@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,16 +23,33 @@ import cn.accessbright.blade.repository.UserRepository;
  * @author 李乐 601235723@qq.com
  * @version 1.0 2016年4月1日 Copyright 2016 XXX有限公司.
  */
+@Service
 public class UserService extends ApplicationService {
 
 	@Autowired
 	private UserRepository userRepository;
 
-	@Autowired
-	private IdGenerator idGenerator;
+//	@Autowired
+//	private IdGenerator idGenerator;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+	@Cacheable(value = "user",key = "#username")
+	public User findByUsername(String username){
+		return userRepository.findByUsername(username);
+	}
+
+	@CacheEvict(value = "user")
+	public void delete(Integer id){
+		userRepository.delete(id);
+	}
+
+	@CachePut(value = "user",key = "#user.username")
+	public void update(User user){
+	User old=	userRepository.findOne(user.getId());
+		userRepository.saveAndFlush(user);
+	}
 
 	/**
 	 * 注册用户
@@ -47,6 +66,7 @@ public class UserService extends ApplicationService {
 		user.setPassword(encodedPassword);
 		user.setPhone(request.getPhone());
 		user.lock();// 未激活状态
+		user.setActiveCode(UUID.randomUUID().toString());
 
 //		user.setActiveCode(idGenerator.generateId());
 		userRepository.save(user);
@@ -59,7 +79,6 @@ public class UserService extends ApplicationService {
 	 * @param activeCode
 	 */
 	@Transactional
-	@CacheEvict(cacheNames = "userCache")
 	public void activeUser(UUID activeCode) {
 //		User user = userRepository.findByActiveCode(activeCode);
 //		if (user != null) {

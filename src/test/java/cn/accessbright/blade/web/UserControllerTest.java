@@ -12,7 +12,10 @@ import org.springframework.web.servlet.View;
 
 import cn.accessbright.blade.SpringBootTest;
 import cn.accessbright.blade.web.controller.UserController;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 18678fcb40d49d049c02de54468fd5f3856b2c83
 @Ignore
 public class UserControllerTest extends SpringBootTest {
 
@@ -27,7 +30,11 @@ public class UserControllerTest extends SpringBootTest {
 	}
 
 	@Test
+<<<<<<< HEAD
 
+=======
+	@Ignore
+>>>>>>> 18678fcb40d49d049c02de54468fd5f3856b2c83
 	public void test() {
 		System.out.println("=======================HttpMessageConverters===================================");
 		Map<String, HttpMessageConverter> messageConverters = context.getBeansOfType(HttpMessageConverter.class);

@@ -9,7 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.accessbright.blade.SpringBootTest;
 import cn.accessbright.blade.domain.system.User;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 18678fcb40d49d049c02de54468fd5f3856b2c83
 @Ignore
 public class UserRepositoryTest extends SpringBootTest {
 
