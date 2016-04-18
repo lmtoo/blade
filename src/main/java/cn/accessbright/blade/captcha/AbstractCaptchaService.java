@@ -7,10 +7,14 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Random;
-import java.util.UUID;
 
 /**
+ * 抽象的验证码服务，子类需实现生成验证码文本，和根据文本生成验证码图片的逻辑，<br>
+ * <p>
+ * 提供了验证码图片长宽、字体大小、随机文本的设置<br>
+ * <p>
+ * 验证码服务，需要依赖验证码缓存
+ * <p>
  * Created by Administrator on 2016/4/13.
  */
 public abstract class AbstractCaptchaService implements CaptchaService {
@@ -49,14 +53,6 @@ public abstract class AbstractCaptchaService implements CaptchaService {
         this.captchaHolder = captchaHolder;
     }
 
-    @Override
-    public String generateKey() {
-        String key = UUID.randomUUID().toString().replaceAll("-","");
-        String value = generateCaptchaText();
-        captchaHolder.put(key, value);
-        return key;
-    }
-
     protected abstract String generateCaptchaText();
 
     @Override
@@ -82,7 +78,8 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
     @Override
     public void writeImageTo(String captchaKey, OutputStream output) {
-        String text = captchaHolder.get(captchaKey);
+        String text = generateCaptchaText();
+        captchaHolder.put(captchaKey, text);
 
         if (text == null) {
             throw new CaptchaException("captcha Key " + captchaKey + " not found!");

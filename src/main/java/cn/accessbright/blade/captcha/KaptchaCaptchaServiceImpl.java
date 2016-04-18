@@ -9,6 +9,8 @@ import java.awt.image.BufferedImage;
 import java.util.Properties;
 
 /**
+ * 基于google Kaptcha的验证码实现
+ *
  * Created by Administrator on 2016/4/13.
  */
 @Component("kaptchaCaptchaService")

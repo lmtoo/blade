@@ -9,6 +9,8 @@ import java.util.Collections;
 import java.util.Map;
 
 /**
+ *  存放验证码的容器，基于HttpSession实现
+ *
  * Created by Administrator on 2016/4/13.
  */
 @Component("sessionCaptchaHolder")

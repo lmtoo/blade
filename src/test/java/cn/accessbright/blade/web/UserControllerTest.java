@@ -3,6 +3,7 @@ package cn.accessbright.blade.web;
 import java.util.Map;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.View;
 import cn.accessbright.blade.SpringBootTest;
 import cn.accessbright.blade.web.controller.UserController;
 
+@Ignore
 public class UserControllerTest extends SpringBootTest {
 
 	@Autowired
@@ -25,6 +27,7 @@ public class UserControllerTest extends SpringBootTest {
 	}
 
 	@Test
+
 	public void test() {
 		System.out.println("=======================HttpMessageConverters===================================");
 		Map<String, HttpMessageConverter> messageConverters = context.getBeansOfType(HttpMessageConverter.class);

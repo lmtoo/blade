@@ -10,6 +10,8 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
+ *  自定义的验证码实现，不依赖第三方实现<br>
+ *
  * Created by Administrator on 2016/4/13.
  */
 @Component("customCaptchaService")

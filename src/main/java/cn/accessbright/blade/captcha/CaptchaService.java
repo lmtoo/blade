@@ -3,16 +3,23 @@ package cn.accessbright.blade.captcha;
 import java.io.OutputStream;
 
 /**
+ * 验证码服务，需要依赖验证码缓存接口（在{@code AbstractCaptchaService}中依赖），使用方式<br>
+ *
+ * 1、获取生成的验证码在缓存中存放的key<br>
+ *
+ * String captchaKey = captchaService.generateKey();<br>
+ *
+ * 2、根据验证码存放的key，生成验证码图片<br>
+ *
+ *  byte[] image = captchaService.generateImage(captchaKey);<br>
+ *
+ *  3、根据用户输入的验证码和验证码存放的key，来验证用户输入的验证码是否正确<br>
+ *
+ *  boolean isValid=captchaService.validate(captchaKey, "1234");<br>
+ *
  * Created by Administrator on 2016/4/13.
  */
 public interface CaptchaService {
-
-    /**
-     * 生成验证码的key，用来生成验证码和验证验证码是否正确
-     *
-     * @return
-     */
-    String generateKey();
 
     /**
      * 生成验证码图片
