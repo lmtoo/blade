@@ -32,6 +32,7 @@ public class SessionCaptchaHolder implements CaptchaHolder {
         Object beforeValue = requestAttributes.getAttribute(CAPTCHA_CACHE_KEY, RequestAttributes.SCOPE_SESSION);
 
         if (beforeValue != null) {
+            @SuppressWarnings("unchecked")
             Map<String, String> beforeKeyValue = (Map<String, String>) beforeValue;
             return beforeKeyValue.get(captchaKey);
         }

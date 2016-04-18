@@ -22,6 +22,7 @@ public class ReidsConfiguration {
         RedisTemplate<Object, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(redisConnectionFactory);
 
+        @SuppressWarnings("unchecked")
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
 
         ObjectMapper om = new ObjectMapper();
