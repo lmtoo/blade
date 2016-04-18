@@ -3,8 +3,8 @@ package cn.accessbright.blade.core.excel;
 import java.util.List;
 
 /**
- * ��������֤��װ����
- * 
+ * 行数据验证器装饰器
+ *
  * @author ll
  *
  */
@@ -19,17 +19,17 @@ public class RowDataValidatorDecorator implements RowDataValidator {
 		if (rowIndex > 1) {
 			if (validator!=null&&!validator.isValidate(rowItem, errorInfo, rowIndex))
 				return false;
-			int beforeErrorCount = errorInfo.size();// ��֤�����ֶ�֮ǰ�Ĵ�����Ϣ����
+			int beforeErrorCount = errorInfo.size();// 验证其他字段之前的错误消息个数
 			validateNonFirstRowColumns(rowItem, errorInfo, rowIndex);
-			int afterErrorCount = errorInfo.size();// ��֤�����ֶ�֮��Ĵ�����Ϣ����
+			int afterErrorCount = errorInfo.size();// 验证其他字段之后的错误消息个数
 			return beforeErrorCount == afterErrorCount;
 		}
 		return true;
 	}
 
 	/**
-	 * ��֤����ķ���Ա��Ϣ��
-	 * 
+	 * 验证其余的非人员信息列
+	 *
 	 * @param rowItem
 	 * @param errorInfo
 	 * @param rowIndex

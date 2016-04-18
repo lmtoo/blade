@@ -61,4 +61,9 @@ public abstract class Strings {
         if (from == null || target == null) return false;
         return from.equals(target);
     }
+
+    public static boolean equalsIgnoreCase(String from,String target){
+        if (from == null || target == null) return false;
+        return from.equalsIgnoreCase(target);
+    }
 }

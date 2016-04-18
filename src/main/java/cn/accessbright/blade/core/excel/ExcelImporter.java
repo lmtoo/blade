@@ -10,15 +10,15 @@ import org.apache.struts.action.ActionMapping;
 import com.icitic.hrms.common.exception.HrmsException;
 
 /**
- * Excel���빤��
- * 
+ * Excel导入工具
+ *
  * @author ll
- * 
+ *
  */
 public interface ExcelImporter {
 	/**
-	 * 1����ת������ҳ��
-	 * 
+	 * 1、跳转到导入页面
+	 *
 	 * @param request
 	 * @param mapping
 	 * @param params
@@ -28,8 +28,8 @@ public interface ExcelImporter {
 	Object toImport(HttpServletRequest request, ActionMapping mapping, Map params) throws HrmsException;
 
 	/**
-	 * 2���ϴ�Excel
-	 * 
+	 * 2、上传Excel
+	 *
 	 * @param request
 	 * @param mapping
 	 * @param form
@@ -39,8 +39,8 @@ public interface ExcelImporter {
 	Object doUpload(HttpServletRequest request, ActionMapping mapping, ActionForm form) throws HrmsException;
 
 	/**
-	 * 3��ִ�е�������
-	 * 
+	 * 3、执行导入数据
+	 *
 	 * @param session
 	 * @return
 	 * @throws HrmsException

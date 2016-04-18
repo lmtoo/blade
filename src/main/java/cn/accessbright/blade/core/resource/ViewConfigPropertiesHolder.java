@@ -1,14 +1,14 @@
 package cn.accessbright.blade.core.resource;
 
+import cn.accessbright.blade.core.ListableProperties;
+import cn.accessbright.blade.core.text.FormatDescriptions;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
-
-import com.icitic.hrms.core.text.FormatDescriptions;
-import com.icitic.hrms.core.util.ListableProperties;
 
 public class ViewConfigPropertiesHolder {
 	private static ViewConfigPropertiesHolder INSTANCE;

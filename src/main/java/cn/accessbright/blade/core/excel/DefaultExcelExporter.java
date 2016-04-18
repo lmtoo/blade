@@ -5,7 +5,7 @@ import java.util.Map;
 import com.icitic.hrms.common.exception.HrmsException;
 
 /**
- * Ĭ�ϴ����ExcelExportDataSupport
+ * 默认代理给ExcelExportDataSupport
  * 
  * @author ll
  * 
@@ -17,7 +17,7 @@ public class DefaultExcelExporter extends AbstractExcelExporter {
 		this.support = support;
 	}
 
-	protected String doGenerateExcel(Map params, String baseDir) throws HrmsException {
+	protected String doGenerateExcel(Map params, String baseDir) {
 		return support.doGenerateExportExcel(params, baseDir);
 	}
 }

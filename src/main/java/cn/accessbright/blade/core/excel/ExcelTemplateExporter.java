@@ -1,30 +1,29 @@
 package cn.accessbright.blade.core.excel;
 
+import cn.accessbright.blade.core.FileExporter;
+import cn.accessbright.blade.core.POITools;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.icitic.hrms.core.util.FileExporter;
-import com.icitic.hrms.util.POITools;
 
 /**
- * 
+ *
  * @author ll
  *
  */
 abstract class ExcelTemplateExporter extends FileExporter {
-	
+
 	private String template;
 
 	/**
-	 * ���캯��
-	 * 
+	 * 构造函数
+	 *
 	 * @param path
-	 * @param titleName
-	 * @param headerNames
-	 *            ��ͷ�����ƣ�Ĭ��ΪString����
-	 * @param data
+	 * @param template
+	 *            列头的名称，默认为String数组
 	 */
 	public ExcelTemplateExporter(String path, String template) {
 		super(path);
@@ -39,7 +38,7 @@ abstract class ExcelTemplateExporter extends FileExporter {
 
 			handleExcel(tools);
 
-			log.info("--------------------д���ļ�" + filepath + "------------------------");
+			log.info("--------------------写入文件" + filepath + "------------------------");
 			tools.dispose(new FileOutputStream(filepath));
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -49,7 +48,7 @@ abstract class ExcelTemplateExporter extends FileExporter {
 					inputStream.close();
 				} catch (IOException e) {
 					e.printStackTrace();
-					log.debug("--------------------�ر��ļ����쳣" + e.getMessage() + "------------------------");
+					log.debug("--------------------关闭文件流异常" + e.getMessage() + "------------------------");
 				}
 			}
 		}

@@ -4,8 +4,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.icitic.hrms.common.exception.HrmsException;
-
 /**
  * 
  * @author ll
@@ -13,11 +11,10 @@ import com.icitic.hrms.common.exception.HrmsException;
  */
 public interface ExcelExporter {
 	/**
-	 * ����Excel
+	 * 导出Excel
 	 * 
 	 * @param request
 	 * @return
-	 * @throws HrmsException
 	 */
-	Object doExport(HttpServletRequest request, Map params) throws HrmsException;
+	Object doExport(HttpServletRequest request, Map params) ;
 }

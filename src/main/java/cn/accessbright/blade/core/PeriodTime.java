@@ -185,7 +185,7 @@ public class PeriodTime implements Comparable {
 	 * @return
 	 */
 	public static boolean isBefore(String date1, String time1, String date2, String time2) {
-		if (StringUtils.equals(date1, date2)) {
+		if (Strings.equals(date1, date2)) {
 			return SHANGWU.equals(time1) && XIAWU.equals(time2);
 		}
 		return date1.compareTo(date2) < 0;

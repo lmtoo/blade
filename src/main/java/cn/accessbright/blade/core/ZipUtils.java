@@ -1,6 +1,5 @@
 package cn.accessbright.blade.core;
 
-import com.icitic.hrms.util.Tools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.FileCopyUtils;

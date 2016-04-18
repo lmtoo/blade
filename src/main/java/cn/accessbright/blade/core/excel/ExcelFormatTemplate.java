@@ -3,33 +3,30 @@ package cn.accessbright.blade.core.excel;
 import java.util.List;
 import java.util.Map;
 
+import cn.accessbright.blade.core.POITools;
+import cn.accessbright.blade.core.Tools;
+import cn.accessbright.blade.core.text.TextFormatter;
 import org.apache.poi.ss.usermodel.Sheet;
 
-import com.icitic.hrms.core.text.TextFormatter;
-import com.icitic.hrms.util.POITools;
-import com.icitic.hrms.util.POITools.ValueHandler;
-import com.icitic.hrms.util.Tools;
 
 /**
- * ��ʽ��Excel<br>
- * ���dataΪһ��Map��ֻ�����һ��sheet�ĸ�ʽ����<br>
- * ���dataΪһ��List���Ϊÿһ��ListԪ�ؿ�����һ��sheetģ�棬����ʽ�������ɾ����һ��sheetģ�档<br>
- * 
+ * 格式化Excel<br>
+ * 如果data为一个Map则只处理第一个sheet的格式化，<br>
+ * 如果data为一个List则会为每一个List元素拷贝第一个sheet模版，并格式化，最后删除第一个sheet模版。<br>
+ *
  * @author ll
- * 
+ *
  */
 public class ExcelFormatTemplate extends ExcelTemplateExporter {
 	private Object data;
 
 	/**
-	 * ���캯��
-	 * 
+	 *  构造函数
+	 *
 	 * @param path
-	 * @param titleName
-	 * @param headerNames
-	 *            ��ͷ�����ƣ�Ĭ��ΪString����
+	 * @param template
 	 * @param data
-	 */
+     */
 	public ExcelFormatTemplate(String path, String template, Object data) {
 		super(path, template);
 		this.data = data;
@@ -53,7 +50,7 @@ public class ExcelFormatTemplate extends ExcelTemplateExporter {
 	}
 
 	private void handleSingleSheet(POITools tools, Sheet sheet,final Map data) {
-		tools.forEachCell(sheet, new ValueHandler() {
+		tools.forEachCell(sheet, new POITools.ValueHandler() {
 			public String handle(int rowIndex, int cellIndex, String value) {
 				if (!Tools.isEmpty(value)) return TextFormatter.format(value, data);
 				return value;

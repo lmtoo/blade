@@ -12,12 +12,11 @@ import com.icitic.hrms.common.exception.HrmsException;
 public interface ExcelExportDataSupport {
 	
 	/**
-	 * �������ֵ��/��ͷ���ʾ�����ľ���·���������ʾ����baseDirĿ¼���ɵ��ļ���
+	 * 如果返回值以/开头则表示上下文绝对路径，否则表示基于baseDir目录生成的文件名
 	 * 
 	 * @param params
 	 * @param baseDir
 	 * @return
-	 * @throws HrmsException
 	 */
-	String doGenerateExportExcel(Map params, String baseDir) throws HrmsException;
+	String doGenerateExportExcel(Map params, String baseDir);
 }
