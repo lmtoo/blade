@@ -1,9 +1,9 @@
 package cn.accessbright.blade.core;
 
+import cn.accessbright.blade.core.excel.AbstractExcelRow;
+import cn.accessbright.blade.core.excel.ExcelRow;
 import org.apache.poi.ss.usermodel.Sheet;
 
-import com.icitic.hrms.core.excel.AbstractExcelRow;
-import com.icitic.hrms.core.excel.ExcelRow;
 
 public class POIRow extends AbstractExcelRow {
 	private Sheet sheet;

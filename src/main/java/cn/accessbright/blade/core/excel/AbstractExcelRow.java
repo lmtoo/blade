@@ -1,5 +1,6 @@
 package cn.accessbright.blade.core.excel;
 
+import cn.accessbright.blade.core.Strings;
 import cn.accessbright.blade.core.Tools;
 
 import java.util.Arrays;
@@ -36,7 +37,7 @@ public abstract class AbstractExcelRow implements ExcelRow {
     }
 
     public ExcelRow addString(Object value) throws RuntimeException {
-        addString(Tools.toString(value));
+        addString(Strings.toString(value));
         return this;
     }
 
@@ -61,7 +62,7 @@ public abstract class AbstractExcelRow implements ExcelRow {
 
     public ExcelRow addString(Object[] values, int start, int lenth) {
         for (int i = start; i < lenth; i++) {
-            addString(Tools.toString(values[i]), TEXT_ALIGN_LEFT);
+            addString(Strings.toString(values[i]), TEXT_ALIGN_LEFT);
         }
         return this;
     }
@@ -157,7 +158,7 @@ public abstract class AbstractExcelRow implements ExcelRow {
     }
 
     public ExcelRow addNumber(Object value) throws RuntimeException {
-        addNumber(Tools.toString(value));
+        addNumber(Strings.toString(value));
         return this;
     }
 
@@ -304,39 +305,6 @@ public abstract class AbstractExcelRow implements ExcelRow {
         addInteger(num.intValue());
         return this;
     }
-
-
-    public ExcelRow addCode(String key, Map values, String codeType) {
-        return addCode(key, values, codeType, true);
-    }
-
-    public ExcelRow addCode(String[] keys, Map values, String codeType) {
-        for (int i = 0; i < keys.length; i++) {
-            addCode(keys[i], values, codeType);
-        }
-        return this;
-    }
-
-    public ExcelRow addCode(String key, Map values, String codeType, boolean ignoreKeyCase) {
-        if (ignoreKeyCase) {
-            String upperKey = key.toUpperCase();
-            String lowerKey = key.toLowerCase();
-            key = values.containsKey(lowerKey) ? lowerKey : upperKey;
-        }
-        return addCode((String) values.get(key), codeType);
-    }
-
-    public ExcelRow addCode(String[] keys, Map values, String codeType, boolean ignoreKeyCase) {
-        for (int i = 0; i < keys.length; i++) {
-            addCode(keys[i], values, codeType, ignoreKeyCase);
-        }
-        return this;
-    }
-
-    public ExcelRow addCode(Object value, String codeType) {
-        return addCode(value + "", codeType);
-    }
-
 
     public ExcelRow mergeString(int from, int to, String value) throws RuntimeException {
         mergeString(from, to, value, TEXT_ALIGN_CENTER);

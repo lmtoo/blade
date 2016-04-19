@@ -7,90 +7,90 @@ import java.util.Map;
 
 /**
  * 树节点
- * 
- * @author ll
  *
+ * @author ll
  */
 public class TreeNode {
-	private TreeNode parent;
-	private String name;
-	private int index;
-	private LinkedHashMap children = new LinkedHashMap();
+    private TreeNode parent;
+    private String name;
+    private int index;
 
-	private TreeNode(String name) {
-		this.name = name;
-	}
+    private LinkedHashMap children = new LinkedHashMap();
 
-	public TreeNode getParent() {
-		return parent;
-	}
+    private TreeNode(String name) {
+        this.name = name;
+    }
 
-	public void setParent(TreeNode parent) {
-		this.parent = parent;
-	}
+    public TreeNode getParent() {
+        return parent;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setParent(TreeNode parent) {
+        this.parent = parent;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public int getIndex() {
-		return index;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setIndex(int index) {
-		this.index = index;
-	}
+    public int getIndex() {
+        return index;
+    }
 
-	public Map getChildren() {
-		return Collections.unmodifiableMap(this.children);
-	}
+    public void setIndex(int index) {
+        this.index = index;
+    }
 
-	public TreeNode addChild(TreeNode node) {
-		node.setIndex(this.children.size());
-		node.setParent(this);
-		this.children.put(node.getName(), node);
-		return node;
-	}
+    public Map getChildren() {
+        return Collections.unmodifiableMap(this.children);
+    }
 
-	public TreeNode addChild(String name) {
-		TreeNode node = TreeNode.valueOf(name);
-		addChild(node);
-		return node;
-	}
+    public TreeNode addChild(TreeNode node) {
+        node.setIndex(this.children.size());
+        node.setParent(this);
+        this.children.put(node.getName(), node);
+        return node;
+    }
 
-	public boolean isRoot() {
-		return parent == null;
-	}
+    public TreeNode addChild(String name) {
+        TreeNode node = TreeNode.valueOf(name);
+        addChild(node);
+        return node;
+    }
 
-	public boolean isLeaf() {
-		return children.isEmpty();
-	}
+    public boolean isRoot() {
+        return parent == null;
+    }
 
-	/**
-	 * ����������tree�ڵ�
-	 * 
-	 * @param visitor
-	 */
-	public void accept(TreeNodeVisitor visitor) {
-		visitor.visit(this);
-		if (!isLeaf()) {
-			Iterator iter = children.values().iterator();
-			while (iter.hasNext()) {
-				TreeNode node = (TreeNode) iter.next();
-				node.accept(visitor);
-			}
-		}
-	}
+    public boolean isLeaf() {
+        return children.isEmpty();
+    }
 
-	public String toString() {
-		return name;
-	}
+    /**
+     * ����������tree�ڵ�
+     *
+     * @param visitor
+     */
+    public void accept(TreeNodeVisitor visitor) {
+        visitor.visit(this);
+        if (!isLeaf()) {
+            Iterator iter = children.values().iterator();
+            while (iter.hasNext()) {
+                TreeNode node = (TreeNode) iter.next();
+                node.accept(visitor);
+            }
+        }
+    }
 
-	public static TreeNode valueOf(String name) {
-		return new TreeNode(name);
-	}
+    public String toString() {
+        return name;
+    }
+
+    public static TreeNode valueOf(String name) {
+        return new TreeNode(name);
+    }
 }

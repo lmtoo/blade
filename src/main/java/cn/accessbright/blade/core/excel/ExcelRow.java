@@ -124,22 +124,6 @@ public interface ExcelRow {
 
     ExcelRow addInteger(List keys, Map values, boolean ignoreKeyCase);
 
-    // =================================设置代码值=================================
-    ExcelRow addCode(Object value, String codeType);
-
-    ExcelRow addCode(String value, String codeType);
-
-    ExcelRow addCode(String key, Map values, String codeType);
-
-    ExcelRow addCode(String[] keys, Map values, String codeType);
-
-    ExcelRow addCode(List infos, Map values, boolean ignoreKeyCase);
-
-    ExcelRow addCode(String key, Map values, String codeType, boolean ignoreKeyCase);
-
-    ExcelRow addCode(String[] keys, Map values, String codeType, boolean ignoreKeyCase);
-
-
     // =================================合并单元格并设置值=================================
 
     /**

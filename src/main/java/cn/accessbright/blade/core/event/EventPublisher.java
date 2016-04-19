@@ -12,5 +12,5 @@ public interface EventPublisher {
 	 * 
 	 * @param event
 	 */
-	void publishEvent(HrEvent event);
+	void publishEvent(DomainEvent event);
 }

@@ -1,5 +1,6 @@
 package cn.accessbright.blade.core.event;
 
+import cn.accessbright.blade.core.Strings;
 import com.icitic.hrms.common.exception.HrmsException;
 import com.icitic.hrms.util.Tools;
 
@@ -8,7 +9,7 @@ import com.icitic.hrms.util.Tools;
  * @author ll
  *
  */
-public class MessageEvent extends HrEvent {
+public class MessageEvent extends DomainEvent {
 	private String message;
 
 	public MessageEvent(Object source) {
@@ -21,7 +22,7 @@ public class MessageEvent extends HrEvent {
 	}
 
 	public boolean isValid() {
-		return !Tools.isEmpty(message) && (source instanceof HrmsException);
+		return !Strings.isEmpty(message) && (source instanceof HrmsException);
 	}
 
 	public String getMessage() {

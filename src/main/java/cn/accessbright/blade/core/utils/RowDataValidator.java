@@ -1,4 +1,4 @@
-package cn.accessbright.blade.core.excel;
+package cn.accessbright.blade.core.utils;
 
 import java.util.List;
 
@@ -17,5 +17,5 @@ public interface RowDataValidator {
      * @param rowIndex  当前行索引
      * @return
      */
-    boolean isValidate(String[] rowItem, List errorInfo, int rowIndex);
+    boolean isValidate(String[] rowItem, List<String> errorInfo, int rowIndex);
 }

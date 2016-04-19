@@ -34,7 +34,7 @@ public class DefaultEventMulticaster implements EventMulticaster {
 	/**
 	 * �㲥�¼�
 	 */
-	public void multicastEvent(HrEvent event) {
+	public void multicastEvent(DomainEvent event) {
 		if(event==null)return;
 		Iterator iter = listeners.iterator();
 		while (iter.hasNext()) {
@@ -46,7 +46,7 @@ public class DefaultEventMulticaster implements EventMulticaster {
 	/**
 	 * �����¼�
 	 */
-	public void publishEvent(HrEvent event) {
+	public void publishEvent(DomainEvent event) {
 		multicastEvent(event);
 	}
 }

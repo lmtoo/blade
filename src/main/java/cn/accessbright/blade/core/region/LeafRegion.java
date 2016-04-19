@@ -1,4 +1,4 @@
-package cn.accessbright.blade.core;
+package cn.accessbright.blade.core.region;
 
 /**
  * 叶子区域，可以存放内容，但是不能有子区域

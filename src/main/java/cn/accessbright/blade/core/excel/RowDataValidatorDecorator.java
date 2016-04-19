@@ -1,5 +1,7 @@
 package cn.accessbright.blade.core.excel;
 
+import cn.accessbright.blade.core.utils.RowDataValidator;
+
 import java.util.List;
 
 /**
@@ -15,12 +17,12 @@ public class RowDataValidatorDecorator implements RowDataValidator {
 		this.validator = validator;
 	}
 
-	public boolean isValidate(String[] rowItem, List errorInfo, int rowIndex) {
+	public boolean isValidate(String[] rowItem, List<String> errorInfo, int rowIndex) {
 		if (rowIndex > 1) {
 			if (validator!=null&&!validator.isValidate(rowItem, errorInfo, rowIndex))
 				return false;
 			int beforeErrorCount = errorInfo.size();// 验证其他字段之前的错误消息个数
-			validateNonFirstRowColumns(rowItem, errorInfo, rowIndex);
+			validateNonFirstRow(rowItem, errorInfo, rowIndex);
 			int afterErrorCount = errorInfo.size();// 验证其他字段之后的错误消息个数
 			return beforeErrorCount == afterErrorCount;
 		}
@@ -35,6 +37,6 @@ public class RowDataValidatorDecorator implements RowDataValidator {
 	 * @param rowIndex
 	 * @return
 	 */
-	protected void validateNonFirstRowColumns(String[] rowItem, List errorInfo, int rowIndex) {
+	protected void validateNonFirstRow(String[] rowItem, List errorInfo, int rowIndex) {
 	}
 }

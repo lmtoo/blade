@@ -1,4 +1,4 @@
-package cn.accessbright.blade.core;
+package cn.accessbright.blade.core.region;
 
 /**
  * 区域的抽象表示

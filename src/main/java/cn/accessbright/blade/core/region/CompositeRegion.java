@@ -1,4 +1,4 @@
-package cn.accessbright.blade.core;
+package cn.accessbright.blade.core.region;
 
 
 import java.util.Iterator;

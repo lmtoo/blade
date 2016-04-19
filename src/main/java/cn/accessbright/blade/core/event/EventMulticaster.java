@@ -37,5 +37,5 @@ public interface EventMulticaster extends EventPublisher {
 	 * @param event
 	 *            the event to multicast
 	 */
-	void multicastEvent(HrEvent event);
+	void multicastEvent(DomainEvent event);
 }

@@ -1,5 +1,6 @@
 package cn.accessbright.blade.core;
 
+import cn.accessbright.blade.core.utils.RowDataMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.Assert;
 

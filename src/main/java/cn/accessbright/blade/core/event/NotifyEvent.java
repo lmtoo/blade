@@ -12,7 +12,7 @@ import com.icitic.hrms.util.Tools;
  * @author ll
  * 
  */
-public abstract class NotifyEvent extends HrEvent {
+public abstract class NotifyEvent extends DomainEvent {
 	private String titleTemplate = "����һ����{0}��{1}";
 	protected String[] ids;
 	// ֪ͨ��Ϣ

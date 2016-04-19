@@ -7,5 +7,5 @@ package cn.accessbright.blade.core.event;
  * 
  */
 public interface EventListener extends java.util.EventListener {
-	void onEvent(HrEvent event);
+	void onEvent(DomainEvent event);
 }

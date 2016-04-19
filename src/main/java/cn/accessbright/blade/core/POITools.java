@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import cn.accessbright.blade.core.excel.ExcelRow;
 import org.apache.poi.hssf.usermodel.HSSFDataFormat;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -23,7 +24,6 @@ import org.apache.poi.ss.util.RegionUtil;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.icitic.hrms.core.excel.ExcelRow;
 
 public class POITools {
 	private static POITools instance = new POITools();
@@ -77,26 +77,18 @@ public class POITools {
 
 	public void addString(Sheet sheet, int column, int row, String value, int align) {
 		Cell cell = getCell(sheet, row, column);
-		if(align!=ExcelRow.TEXT_ALIGN_ORIGNAL){
+		if(align!= ExcelRow.TEXT_ALIGN_ORIGNAL){
 			cell.setCellStyle(cellFormats[align]);
 		}
 		cell.setCellValue(Tools.filterNullToStr(value));
 	}
 
 	public void addString(Sheet sheet, int column, int row, Object value, int align) {
-		addString(sheet, column, row, Tools.toString(value), align);
+		addString(sheet, column, row, Strings.toString(value), align);
 	}
 
 	public void addString(Sheet sheet, int column, int row, String value) {
 		addString(sheet, column, row, value, ExcelRow.TEXT_ALIGN_LEFT);
-	}
-
-	public void addCode(Sheet sheet, int column, int row, String value,String codeType) {
-		addCode(sheet, column, row, value,codeType,ExcelRow.TEXT_ALIGN_LEFT);
-	}
-
-	public void addCode(Sheet sheet, int column, int row, String value,String codeType, int align){
-		addString(sheet, column, row, CodeUtil.interpertCode(codeType, value), align);
 	}
 
 	public void addNumber(Sheet sheet, int column, int row, double value, int digits) {
@@ -292,7 +284,7 @@ public class POITools {
 	}
 
 	private CellStyle createNumberFormat(int digits, Font font) {
-		String suffix = Tools.generateRepeatChars(digits, '0');
+		String suffix = Strings.repeatChars(digits, '0');
 		String format = "#,##0" + (suffix.length() > 0 ? ("." + suffix) : "");
 		CellStyle cellFotmat = wb.createCellStyle();
 		cellFotmat.setBorderTop(CellStyle.BORDER_THIN);

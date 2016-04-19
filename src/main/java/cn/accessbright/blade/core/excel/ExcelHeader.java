@@ -1,8 +1,8 @@
 package cn.accessbright.blade.core.excel;
 
 
-import cn.accessbright.blade.core.CompositeRegion;
-import cn.accessbright.blade.core.Point;
+import cn.accessbright.blade.core.region.CompositeRegion;
+import cn.accessbright.blade.core.region.Point;
 
 /**
  * 表示一个excel表格的头部区域<br>

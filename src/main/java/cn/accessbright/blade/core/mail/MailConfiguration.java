@@ -3,6 +3,7 @@ package cn.accessbright.blade.core.mail;
 import java.util.Properties;
 
 import com.icitic.hrms.cache.SysCacheTool;
+import org.springframework.context.annotation.PropertySource;
 
 public class MailConfiguration {
 	private static MailConfiguration INSTANCE;

@@ -28,9 +28,11 @@
         <shiro.version>1.2.4</shiro.version>
         <kaptcha.version>2.3</kaptcha.version>
         <guava.version>18.0</guava.version>
+        <poi.version>3.14</poi.version>
     </properties>
 
     <dependencies>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -65,6 +67,7 @@
             <artifactId>spring-session</artifactId>
             <version>1.1.1.RELEASE</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -141,6 +144,18 @@
         </dependency>
 
         <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.google.code.kaptcha</groupId>
             <artifactId>kaptcha</artifactId>
             <version>${kaptcha.version}</version>
@@ -151,6 +166,17 @@
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
         </dependency>
 
         <!-- shiro -->

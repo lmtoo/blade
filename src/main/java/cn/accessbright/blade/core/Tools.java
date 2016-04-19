@@ -53,6 +53,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
+import java.util.regex.Pattern;
 
 
 /**
@@ -66,132 +67,11 @@ public class Tools {
     public static final String REF_SELF = "$SELF";
 
     public static BigDecimal ZERO = new BigDecimal(0);
-    //身份证验证正则表达式
-    public static final String ID_CARD_PATTERN = "^\\d{6}(\\d{4})([0,1]\\d)([0-3]\\d)\\d{2}(\\d)[0-9xX]$";
 
-    //日期验证正则表达式
-    public static final String DATE_PATTERN = "^\\s*\\d{4}-\\d{2}-\\d{2}\\s*$";
 
 
     private Tools() {
         //cant instantiate
-    }
-
-    /**
-     * 调用org.apache.commons.beanutils.BeanUtils
-     * 的方法 copyProperties（）
-     *
-     * @param dest 目标对象
-     * @param orig 初始对象
-     */
-    public static void copyProperties(Object dest, Object orig) {
-        try {
-            if (orig == null || dest == null) return;
-            BeanUtils.copyProperties(dest, orig);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 当orig的属性为 null 的就不拷贝到 dest
-     * by sunmh
-     *
-     * @param dest
-     * @param orig
-     */
-    public static void copyPropertiesWithoutNull(Object dest, Object orig) {
-        try {
-            // 得到两个Class 的所有成员变量
-            Field[] destFields = dest.getClass().getDeclaredFields();
-            Field[] origFields = orig.getClass().getDeclaredFields();
-
-            // 设置访问权限
-            AccessibleObject.setAccessible(destFields, true);
-            AccessibleObject.setAccessible(origFields, true);
-
-            Object value = null;
-            String name = null;
-            String returnType = null;
-
-            for (int i = 0; i < origFields.length; i++) {
-                name = origFields[i].getName();
-                returnType = origFields[i].getType().getName();
-                for (int j = 0; j < destFields.length; j++) {
-                    if (name.equals(destFields[j].getName()) && returnType.equals(destFields[j].getType().getName())) {
-                        value = origFields[i].get(orig);
-                        if (value != null) {
-                            destFields[j].set(dest, value);
-                        }
-                        break;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public static void copyProperties(Object target, Object source, boolean copyNull, boolean copyEmpty) {
-        try {
-            Map targetProps = PropertyUtils.describe(target);
-            Map sourceProps = PropertyUtils.describe(source);
-            Iterator iter = targetProps.keySet().iterator();
-            while (iter.hasNext()) {
-                String prop = (String) iter.next();
-                if (sourceProps.containsKey(prop)) {
-                    Object targetValue = targetProps.get(prop);
-                    Object sourceValue = sourceProps.get(prop);
-                    if (!ObjectUtils.equals(targetValue, sourceValue)) {
-                        boolean isNull = sourceValue == null;
-                        boolean isEmpty = sourceValue != null && sourceValue instanceof String && Tools.isEmpty((String) sourceValue);
-                        if (!copyNull && isNull) continue;
-                        if (!copyEmpty && isEmpty) continue;
-                        Tools.setPropValue(targetProps, prop, sourceValue);
-                    }
-                }
-            }
-        } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
-    public static void copyProperties(Object target, Map sourceProps, boolean copyNull, boolean copyEmpty) {
-        try {
-            Map targetProps = PropertyUtils.describe(target);
-            Iterator iter = targetProps.keySet().iterator();
-            while (iter.hasNext()) {
-                String prop = (String) iter.next();
-                if (sourceProps.containsKey(prop) && targetProps.containsKey(prop)) {
-                    Object targetValue = targetProps.get(prop);
-                    Object sourceValue = sourceProps.get(prop);
-                    if (!ObjectUtils.equals(targetValue, sourceValue)) {
-                        boolean isNull = sourceValue == null;
-                        boolean isEmpty = sourceValue != null && sourceValue instanceof String && Tools.isEmpty((String) sourceValue);
-                        if (!copyNull && isNull) continue;
-                        if (!copyEmpty && isEmpty) continue;
-                        Tools.setPropValue(target, prop, sourceValue);
-                    }
-                }
-            }
-        } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
     }
 
     public static float betweenHours(String hour1, String hour2) {
@@ -793,7 +673,7 @@ public class Tools {
     public static String StrArray2String(String[] strArray, String delim) {
         if (strArray == null) return "";
         int size = strArray.length;
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < size; i++) {
             sb.append(strArray[i]).append(delim);
         }
@@ -1196,21 +1076,6 @@ public class Tools {
     }
 
     /**
-     * 根据指定的比较器进行排序
-     *
-     * @param list
-     * @param c
-     */
-    public static void sort(List list, Comparator c) {
-        Object[] os = list.toArray();
-        Arrays.sort(os, c);
-        list.clear();
-        for (int i = 0; i < os.length; i++) {
-            list.add(os[i]);
-        }
-    }
-
-    /**
      * 返回当前年份
      *
      * @return String
@@ -1599,82 +1464,6 @@ public class Tools {
         return ts;
     }
 
-    public static boolean isEmpty(Collection coll) {
-        if (coll == null) return true;
-        return coll.isEmpty();
-    }
-
-    public static boolean isNotEmpty(int[] coll) {
-        return !isEmpty(coll);
-    }
-
-    public static boolean isNotEmpty(Collection coll) {
-        return !isEmpty(coll);
-    }
-
-    public static boolean isNotEmpty(String str) {
-        return !isEmpty(str);
-    }
-
-    public static boolean isEmpty(Map dict) {
-        if (dict == null) return true;
-        return dict.isEmpty();
-    }
-
-    /**
-     * 可验证String、StringBuffer、StringBuilder等实现了CharSequence接口的类<br>
-     * 是否为空
-     *
-     * @param str
-     * @return
-     */
-    public static boolean isEmpty(StringBuffer str) {
-        if (str == null) return true;
-        if (str.length() == 0) return true;
-        return false;
-    }
-
-    /**
-     * 可验证String、StringBuffer、StringBuilder等实现了CharSequence接口的类<br>
-     * 是否为空
-     *
-     * @param str
-     * @return
-     */
-    public static boolean isEmpty(String str) {
-        if (str == null) return true;
-        if (str.trim().length() == 0) return true;
-        return false;
-    }
-
-    public static boolean isEmpty(Object[] array) {
-        if (array == null) return true;
-        if (array.length == 0) return true;
-        return false;
-    }
-
-    public static boolean isEmpty(int[] array) {
-        if (array == null) return true;
-        if (array.length == 0) return true;
-        return false;
-    }
-
-    public static boolean isAllNull(Object[] array) {
-        boolean allNull = true;
-        for (int i = 0; i < array.length; i++) {
-            allNull = allNull && array[i] == null;
-        }
-        return allNull;
-    }
-
-    public static boolean isAllEmpty(String[] array) {
-        boolean allNull = true;
-        for (int i = 0; i < array.length; i++) {
-            allNull = allNull && isEmpty(array[i]);
-        }
-        return allNull;
-    }
-
 
     public static boolean isQuarter(String quarter) {
         if (isEmpty(quarter)) return false;
@@ -1966,82 +1755,5 @@ public class Tools {
         return toNumber(num).setScale(scale, BigDecimal.ROUND_HALF_UP).toString();
     }
 
-    public static boolean isNumber(String number) {
-        if (Tools.isEmpty(number)) return false;
-        try {
-            Double.parseDouble(number.replaceAll(",", ""));
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
 
-    public static boolean isEmptyOrNumber(String number) {
-        return isEmpty(number) || isNumber(number);
-    }
-
-    /**
-     * 查询非数字的索引，未找到则返回-1
-     *
-     * @param numbers
-     * @param startIndex
-     * @param endIndex
-     * @return
-     */
-    public static int findNonEmptyOrNumber(String[] numbers, int startIndex, int endIndex) {
-        for (int i = startIndex; i <= endIndex; i++) {
-            String number = numbers[i];
-            if (!isEmpty(number) && !isNumber(number)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    public static boolean isEmptyOrNumber(String[] numbers, int startIndex, int endIndex) {
-        return findNonEmptyOrNumber(numbers, startIndex, endIndex) == -1;
-    }
-
-
-    public static String generateRepeatChars(int count, char c) {
-        String digits = "";
-        if (count > 0) {
-            for (int i = 0; i < count; i++) {
-                digits += c;
-            }
-        }
-        return digits;
-    }
-
-    /**
-     * 根据逗号,冒号：空格来分割字符串
-     *
-     * @param str
-     * @return
-     */
-    public static String[] split(String str) {
-        if (isEmpty(str)) return new String[]{};
-        return str.split("[,:\\s]+");
-    }
-
-    public static String toString(Object target) {
-        if (target == null) return "";
-        if (target instanceof String) return (String) target;
-        if (target instanceof Object[]) return ListArrayUtil.join((Object[]) target, ",");
-        return target.toString();
-    }
-
-    public static String toString(Object target, String defaultValue) {
-        String str = toString(target);
-        if (isEmpty(str)) return defaultValue;
-        return str;
-    }
-
-    public static boolean notEquals(String from, String target) {
-        return !equals(from, target);
-    }
-
-    public static boolean equals(String from, String target) {
-        return StringUtils.equals(from, target);
-    }
 }
