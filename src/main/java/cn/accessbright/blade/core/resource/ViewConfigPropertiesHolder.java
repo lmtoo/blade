@@ -1,6 +1,6 @@
 package cn.accessbright.blade.core.resource;
 
-import cn.accessbright.blade.core.ListableProperties;
+import cn.accessbright.blade.core.utils.collections.ListableProperties;
 import cn.accessbright.blade.core.text.FormatDescriptions;
 
 import java.io.IOException;

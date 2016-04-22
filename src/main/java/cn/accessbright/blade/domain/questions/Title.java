@@ -26,9 +26,6 @@ public class Title extends AbstractPersistable<Integer> {
     @ManyToOne
     private Card card;//所属卡牌
 
-    @ManyToOne
-    private Skill skill;//技能效果
-
     public Image getImage() {
         return image;
     }
@@ -75,14 +72,6 @@ public class Title extends AbstractPersistable<Integer> {
 
     public void setCard(Card card) {
         this.card = card;
-    }
-
-    public Skill getSkill() {
-        return skill;
-    }
-
-    public void setSkill(Skill skill) {
-        this.skill = skill;
     }
 
     public Opus getOpus() {

@@ -23,7 +23,7 @@ public class Skill extends AbstractPersistable<Integer> {
     @Enumerated(EnumType.ORDINAL)
     private SkillType type;//技能类型（1去除错误选项，2延长答题时间）
 
-    private Double value;//技能值
+    private Integer value;//技能值
 
     private String description;
 
@@ -47,11 +47,11 @@ public class Skill extends AbstractPersistable<Integer> {
         this.type = type;
     }
 
-    public Double getValue() {
+    public Integer getValue() {
         return value;
     }
 
-    public void setValue(Double value) {
+    public void setValue(Integer value) {
         this.value = value;
     }
 

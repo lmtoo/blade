@@ -1,7 +1,7 @@
 package cn.accessbright.blade.core.utils;
 
-import cn.accessbright.blade.core.Strings;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeansException;
@@ -10,6 +10,8 @@ import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -30,7 +32,7 @@ public class Objects {
 
 
                 try {
-                    if (propertyDescriptor != null){
+                    if (propertyDescriptor != null) {
                         Method readMethod = propertyDescriptor.getReadMethod();
                         return readMethod.invoke(target);
                     }
@@ -68,6 +70,9 @@ public class Objects {
         return null;
     }
 
+    public static <T> T defaultValue(T source, T defaultValue) {
+        return source == null ? defaultValue : source;
+    }
 
     /**
      * 设置对象或者map的属性，并忽略map的key的大小写
@@ -261,10 +266,10 @@ public class Objects {
                     Object sourceValue = sourceProps.get(prop);
                     if (!ObjectUtils.equals(targetValue, sourceValue)) {
                         boolean isNull = sourceValue == null;
-                        boolean isEmpty = sourceValue != null && sourceValue instanceof String && Tools.isEmpty((String) sourceValue);
+                        boolean isEmpty = sourceValue != null && sourceValue instanceof String && Strings.isEmpty((String) sourceValue);
                         if (!copyNull && isNull) continue;
                         if (!copyEmpty && isEmpty) continue;
-                        Tools.setPropValue(targetProps, prop, sourceValue);
+                        Objects.setPropValue(targetProps, prop, sourceValue);
                     }
                 }
             }
@@ -289,12 +294,12 @@ public class Objects {
                 if (sourceProps.containsKey(prop) && targetProps.containsKey(prop)) {
                     Object targetValue = targetProps.get(prop);
                     Object sourceValue = sourceProps.get(prop);
-                    if (!ObjectUtils.equals(targetValue, sourceValue)) {
+                    if (!equals(targetValue, sourceValue)) {
                         boolean isNull = sourceValue == null;
-                        boolean isEmpty = sourceValue != null && sourceValue instanceof String && Tools.isEmpty((String) sourceValue);
+                        boolean isEmpty = sourceValue != null && sourceValue instanceof String && Strings.isEmpty((String) sourceValue);
                         if (!copyNull && isNull) continue;
                         if (!copyEmpty && isEmpty) continue;
-                        Tools.setPropValue(target, prop, sourceValue);
+                        setPropValue(target, prop, sourceValue);
                     }
                 }
             }
@@ -308,6 +313,13 @@ public class Objects {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+
+    public static boolean equals(Object o1, Object o2) {
+        if (o1 == o2) return true;
+        if (o1 == null || o2 == null) return false;
+        return o1.equals(o2);
     }
 
 }

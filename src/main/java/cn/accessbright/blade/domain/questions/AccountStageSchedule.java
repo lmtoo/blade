@@ -34,7 +34,7 @@ public class AccountStageSchedule extends AbstractPersistable<Integer> {
 
     private Integer overTimeCount;//超时题数
 
-    private Integer gotMoney;//获取金币
+    private Integer gotCoin;//获取金币
 
     private Integer gotExperience;//获取经验
 
@@ -114,12 +114,12 @@ public class AccountStageSchedule extends AbstractPersistable<Integer> {
         this.overTimeCount = overTimeCount;
     }
 
-    public Integer getGotMoney() {
-        return gotMoney;
+    public Integer getGotCoin() {
+        return gotCoin;
     }
 
-    public void setGotMoney(Integer gotMoney) {
-        this.gotMoney = gotMoney;
+    public void setGotCoin(Integer gotCoin) {
+        this.gotCoin = gotCoin;
     }
 
     public Integer getGotExperience() {

@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "t_accounts")
 public class Account extends AbstractPersistable<Integer> {
-    private Integer money;//金币数
+    private Integer coin;//金币数
 
     private Integer level;//等级数
 
@@ -19,12 +19,22 @@ public class Account extends AbstractPersistable<Integer> {
 
     private Integer physical;//体力值
 
-    public Integer getMoney() {
-        return money;
+    private Switch status;
+
+    public Switch getStatus() {
+        return status;
     }
 
-    public void setMoney(Integer money) {
-        this.money = money;
+    public void setStatus(Switch status) {
+        this.status = status;
+    }
+
+    public Integer getCoin() {
+        return coin;
+    }
+
+    public void setCoin(Integer coin) {
+        this.coin = coin;
     }
 
     public Integer getLevel() {

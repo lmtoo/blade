@@ -1,5 +1,7 @@
 package cn.accessbright.blade.core;
 
+import cn.accessbright.blade.core.excel.POITools;
+import cn.accessbright.blade.core.utils.Strings;
 import jxl.Workbook;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
@@ -11,7 +13,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -70,7 +71,7 @@ public class ListArrayUtil {
                 String[] rowItem = new String[needCols];
                 for (int columnIndex = 0; columnIndex < needCols; columnIndex++) { // 列
                     String value = Strings.trim(tools.getValue(sheet, columnIndex, rowIndex));
-                    rowItem[columnIndex] = Tools.isEmpty(value) ? null : value;
+                    rowItem[columnIndex] = KqPeriodTime.Tools.isEmpty(value) ? null : value;
                 }
 
                 if (rowIndex == 0) {
@@ -147,7 +148,7 @@ public class ListArrayUtil {
                 String[] rowItem = new String[needCols];
                 for (int columnIndex = 0; columnIndex < needCols; columnIndex++) { // 列
                     String value = tools.getValue(sheet, columnIndex, rowIndex);
-                    rowItem[columnIndex] = Tools.isEmpty(value) ? null : value;
+                    rowItem[columnIndex] = KqPeriodTime.Tools.isEmpty(value) ? null : value;
                 }
 
                 if (rowIndex == 0) {
@@ -204,7 +205,7 @@ public class ListArrayUtil {
 
         private boolean isAllElementEmtpy(String[] row) {
             for (int i = 0; i < row.length; i++) {
-                if (!Tools.isEmpty(row[i])) return false;
+                if (!KqPeriodTime.Tools.isEmpty(row[i])) return false;
             }
             return true;
         }
@@ -222,7 +223,7 @@ public class ListArrayUtil {
                 } else {
                     for (int columnIndex = 0; columnIndex < row.length; columnIndex++) {
                         String value = row[columnIndex];
-                        if (ArrayUtils.contains(requiredColunmIndex, columnIndex) && Tools.isEmpty(value)) {
+                        if (ArrayUtils.contains(requiredColunmIndex, columnIndex) && KqPeriodTime.Tools.isEmpty(value)) {
                             errorInfo.add("第" + rowIndex + "行第" + (columnIndex + 1) + "列:为空值");
                         }
                     }
@@ -410,11 +411,11 @@ public class ListArrayUtil {
     }
 
     public static String totalOfItems(Iterator dataIter, String summaryColumn) {
-        String total = Tools.ZERO.toString();
+        String total = KqPeriodTime.Tools.ZERO.toString();
         while (dataIter.hasNext()) {
             Object item = dataIter.next();
-            String subValue = Tools.getPropText(item, summaryColumn);
-            total = MathExtend.add(total, Tools.filterNullToZero(subValue));
+            String subValue = KqPeriodTime.Tools.getPropText(item, summaryColumn);
+            total = MathExtend.add(total, KqPeriodTime.Tools.filterNullToZero(subValue));
         }
         return total;
     }
@@ -458,8 +459,8 @@ public class ListArrayUtil {
 
     private static void accumulateValueTo(Map total, String key, Object source) {
         String totalValue = total.get(key) + "";
-        String subValue = Tools.getPropText(source, key);
-        String value = MathExtend.add(Tools.filterNullToZero(totalValue), Tools.filterNullToZero(subValue));
+        String subValue = KqPeriodTime.Tools.getPropText(source, key);
+        String value = MathExtend.add(KqPeriodTime.Tools.filterNullToZero(totalValue), KqPeriodTime.Tools.filterNullToZero(subValue));
         total.put(key, value);
     }
 
@@ -474,11 +475,11 @@ public class ListArrayUtil {
      */
     public static Map toMap(Collection source, String key, String value) {
         Map result = new HashMap();
-        if (Tools.isNotEmpty(source)) {
+        if (KqPeriodTime.Tools.isNotEmpty(source)) {
             Iterator iter = source.iterator();
             while (iter.hasNext()) {
                 Object item = (Object) iter.next();
-                result.put(Tools.getPropValue(item, key), Tools.REF_SELF.equals(value) ? item : Tools.getPropValue(item, value));
+                result.put(KqPeriodTime.Tools.getPropValue(item, key), KqPeriodTime.Tools.REF_SELF.equals(value) ? item : KqPeriodTime.Tools.getPropValue(item, value));
             }
         }
         return result;
@@ -492,7 +493,7 @@ public class ListArrayUtil {
      * @return
      */
     public static Map toSelfRefMap(Collection source, String prop) {
-        return toMap(source, prop, Tools.REF_SELF);
+        return toMap(source, prop, KqPeriodTime.Tools.REF_SELF);
     }
 
 }

@@ -24,6 +24,9 @@ public class AccountQuestion extends AbstractPersistable<Integer> {
     private Integer point;//当前收集到的点数
     private Double triggerPercent;//触发概率（大于0小于100）
 
+    @ManyToOne
+    private Skill skill;//所属技能
+
     public Integer getLevel() {
         return level;
     }
@@ -62,5 +65,13 @@ public class AccountQuestion extends AbstractPersistable<Integer> {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public Skill getSkill() {
+        return skill;
+    }
+
+    public void setSkill(Skill skill) {
+        this.skill = skill;
     }
 }

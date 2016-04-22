@@ -1,7 +1,8 @@
 package cn.accessbright.blade.core.excel;
 
-import cn.accessbright.blade.core.Strings;
-import cn.accessbright.blade.core.Tools;
+import cn.accessbright.blade.core.utils.Strings;
+import cn.accessbright.blade.core.utils.Numbers;
+import cn.accessbright.blade.core.utils.Objects;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -33,7 +34,7 @@ public abstract class AbstractExcelRow implements ExcelRow {
     }
 
     public ExcelRow addString(String prop, Object target) {
-        return addString(Tools.getPropText(target, prop));
+        return addString(Objects.getPropText(target, prop));
     }
 
     public ExcelRow addString(Object value) throws RuntimeException {
@@ -153,7 +154,7 @@ public abstract class AbstractExcelRow implements ExcelRow {
     }
 
     public ExcelRow addNumber(String value) throws RuntimeException {
-        addNumber(Double.parseDouble(Tools.filterNullToZero(value)));
+        addNumber(Numbers.parseDouble(value, 0));
         return this;
     }
 
@@ -185,7 +186,7 @@ public abstract class AbstractExcelRow implements ExcelRow {
     }
 
     public ExcelRow addNumber(String value, int digits) {
-        addNumber(Double.parseDouble(Tools.filterNullToZero(value)), digits);
+        addNumber(Numbers.parseDouble(value, 0), digits);
         return this;
     }
 
@@ -301,8 +302,7 @@ public abstract class AbstractExcelRow implements ExcelRow {
     }
 
     public ExcelRow addInteger(String value) {
-        Double num = new Double(Tools.filterNullToZero(value));
-        addInteger(num.intValue());
+        addInteger((int) Numbers.parseDouble(value, 0));
         return this;
     }
 

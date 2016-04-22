@@ -1,5 +1,7 @@
 package cn.accessbright.blade.core;
 
+import cn.accessbright.blade.core.utils.Strings;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -36,7 +38,7 @@ public class MapToMapResultCallBack extends QueryResultCallBack {
             data.put(theKeyValue, theValue);
         }
         if (theValue != null) {
-            theValue.put(getCanonicalName(columnName), Tools.toString(value));
+            theValue.put(getCanonicalName(columnName), KqPeriodTime.Tools.toString(value));
         }
     }
 

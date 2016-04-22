@@ -1,11 +1,10 @@
 package cn.accessbright.blade.core.text;
 
-import cn.accessbright.blade.core.ListArrayUtil;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import cn.accessbright.blade.core.ListArrayUtil.ObjectMapper;
+import cn.accessbright.blade.core.utils.collections.Collections;
+import cn.accessbright.blade.core.utils.collections.ObjectMapper;
 
 public class FormatDescriptions {
 	private List descriptions = new ArrayList();
@@ -31,7 +30,7 @@ public class FormatDescriptions {
 	}
 
 	public Iterator descIterator() {
-		return ListArrayUtil.map(descriptions, new ListArrayUtil.ObjectMapper() {
+		return Collections.map(descriptions, new ObjectMapper() {
 			public Object map(Object target) {
 				return ((FormatDescription) target).getDescription();
 			}
@@ -43,7 +42,7 @@ public class FormatDescriptions {
 	}
 
 	public Iterator propValueIterator(final Object target) {
-		return ListArrayUtil.map(descriptions, new ListArrayUtil.ObjectMapper() {
+		return Collections.map(descriptions, new ObjectMapper() {
 			public Object map(Object fmtDesc) {
 				return ((FormatDescription) fmtDesc).format(target);
 			}
@@ -51,7 +50,7 @@ public class FormatDescriptions {
 	}
 
 	public List descs() {
-		return ListArrayUtil.map(descriptions, new ObjectMapper() {
+		return Collections.map(descriptions, new ObjectMapper() {
 			public Object map(Object target) {
 				return ((FormatDescription) target).getDescription();
 			}
@@ -63,7 +62,7 @@ public class FormatDescriptions {
 	}
 
 	public List propValues(final Object target) {
-		return ListArrayUtil.map(descriptions, new ObjectMapper() {
+		return Collections.map(descriptions, new ObjectMapper() {
 			public Object map(Object fmtDesc) {
 				return ((FormatDescription) fmtDesc).format(target);
 			}

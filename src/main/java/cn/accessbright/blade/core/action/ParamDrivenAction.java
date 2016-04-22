@@ -319,7 +319,7 @@ public abstract class ParamDrivenAction extends GenericAction {
 
 	/**
 	 * ���ݲ���ǰ׺�������Ͷ���������������ָ��Class�Ķ���
-	 * 
+	 *
 	 * @param request
 	 * @param targetClass
 	 * @param paramPrefix
@@ -353,7 +353,7 @@ public abstract class ParamDrivenAction extends GenericAction {
 
 	/**
 	 * ���ݲ���ǰ׺�Ͷ���������������ָ��Class�Ķ���
-	 * 
+	 *
 	 * @param request
 	 * @param targetClass
 	 *            Ҫ����Ķ���Class
@@ -367,7 +367,7 @@ public abstract class ParamDrivenAction extends GenericAction {
 
 	/**
 	 * ���ݲ���ǰ׺�������Ͷ���������������ָ��Class�Ķ���
-	 * 
+	 *
 	 * @param request
 	 * @param targetClass
 	 * @param paramPrefix
@@ -382,7 +382,7 @@ public abstract class ParamDrivenAction extends GenericAction {
 
 	/**
 	 * ���ݲ���ǰ׺�Ͷ���������������ָ��Class�Ķ���
-	 * 
+	 *
 	 * @param request
 	 * @param targetClass
 	 *            Ҫ����Ķ���Class
@@ -392,11 +392,11 @@ public abstract class ParamDrivenAction extends GenericAction {
 	protected Object buildObjectByParam(HttpServletRequest request, Class targetClass, String paramPrefix) {
 		return buildObjectByParam(request, targetClass, paramPrefix, -1);
 	}
-	
+
 	protected List buildObjectListByParam(HttpServletRequest request, Class targetClass, String paramPrefix){
 		return buildObjectListByParam(request, targetClass, paramPrefix, null, null);
 	}
-	
+
 	protected Map findParamValueByPrefix(HttpServletRequest request,String prefix) {
 		Map data=new HashMap();
 		Enumeration enumer=request.getParameterNames();
@@ -408,10 +408,10 @@ public abstract class ParamDrivenAction extends GenericAction {
 		}
 		return data;
 	}
-	
+
 	/**
 	 * ���ݲ�������ǰ׺�������󼯺�
-	 * 
+	 *
 	 * @param request
 	 * @param targetClass
 	 * @param paramPrefix
@@ -438,10 +438,10 @@ public abstract class ParamDrivenAction extends GenericAction {
 		}
 		return validatableList;
 	}
-	
+
 	/**
 	 * ����ָ����������ǰ׺�ļ��ϴ�С
-	 * 
+	 *
 	 * @param request
 	 * @param paramPrefix
 	 * @return

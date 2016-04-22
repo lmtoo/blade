@@ -1,7 +1,8 @@
 package cn.accessbright.blade.core.excel;
 
-import cn.accessbright.blade.core.Pair;
+import cn.accessbright.blade.core.utils.collections.Pair;
 import cn.accessbright.blade.core.event.EventPublisher;
+import cn.accessbright.blade.core.utils.RowValidateRules;
 
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,7 @@ public interface ExcelImportDataSupport extends EventPublisher {
      * @param params
      * @return
      */
-    ExcelValidateRules getExcelValidateRules(Map params);
+    RowValidateRules getExcelValidateRules(Map params);
 
     /**
      * 最终的导入数据功能

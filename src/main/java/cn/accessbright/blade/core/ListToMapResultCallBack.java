@@ -17,7 +17,7 @@ public class ListToMapResultCallBack extends QueryResultCallBack {
 
     public void read(int columIndex, String columnName, Object value) {
         String canonicalName = getCanonicalName(columnName);
-        rowData.put(canonicalName, Tools.toString(value));
+        rowData.put(canonicalName, KqPeriodTime.Tools.toString(value));
         if (columIndex == columnCount - 1) {//  到末尾列，则将列数据添加到List列表中
             data.add(rowData);
             rowData = new LinkedHashMap();

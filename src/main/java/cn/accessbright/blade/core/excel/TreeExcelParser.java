@@ -1,8 +1,7 @@
 package cn.accessbright.blade.core.excel;
 
-import cn.accessbright.blade.core.POITools;
-import cn.accessbright.blade.core.Tools;
-import cn.accessbright.blade.core.TreeNode;
+import cn.accessbright.blade.core.utils.Strings;
+import cn.accessbright.blade.core.utils.TreeNode;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -65,7 +64,7 @@ public class TreeExcelParser {
      */
     private int getRegionRowCount(POITools tools, Sheet sheet, int colIndex) {
         int row = 0;
-        while (Tools.isNotEmpty(tools.getValue(sheet, colIndex, row))) {
+        while (Strings.isNotEmpty(tools.getValue(sheet, colIndex, row))) {
             row++;
         }
         return row;
@@ -81,7 +80,7 @@ public class TreeExcelParser {
     private int getRegionCount(POITools tools, Sheet sheet) {
         int currentColumnIndex = 0;
         int level = 0;
-        while (Tools.isNotEmpty(tools.getValue(sheet, currentColumnIndex, 0))) {
+        while (Strings.isNotEmpty(tools.getValue(sheet, currentColumnIndex, 0))) {
             currentColumnIndex += treeLevel;
             level++;
         }

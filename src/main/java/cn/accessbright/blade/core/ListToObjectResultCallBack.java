@@ -23,13 +23,13 @@ public class ListToObjectResultCallBack extends QueryResultCallBack {
     public ListToObjectResultCallBack(Class clazz) {
         this.clazz = clazz;
         rowData = newTarget();
-        propertyMapper = Tools.getPropNameMapper(clazz, true);
+        propertyMapper = KqPeriodTime.Tools.getPropNameMapper(clazz, true);
     }
 
     public void read(int columIndex, String columnName, Object value) {
         String colName = getCanonicalName(columnName);
 
-        Tools.setPropValue(rowData, (String) propertyMapper.get(colName), Tools.toString(value));
+        KqPeriodTime.Tools.setPropValue(rowData, (String) propertyMapper.get(colName), KqPeriodTime.Tools.toString(value));
         if (columIndex == columnCount - 1) {// 到末尾列，则将数据对象添加到List列表中
             data.add(rowData);
             rowData = newTarget();

@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name = "t_products")
 public class Product extends AbstractPersistable<Integer> {
     private String name;//商品名称
-    private Integer total;//购买所需金额
+    private Integer price;//购买所需金额
     private CurrencyType currency;//金额类别(1人民币，2游戏币)
 
     private EffectType effectType;//商品增益类型(1增加金币，2增加体力)
@@ -29,12 +29,12 @@ public class Product extends AbstractPersistable<Integer> {
         this.name = name;
     }
 
-    public Integer getTotal() {
-        return total;
+    public Integer getPrice() {
+        return price;
     }
 
-    public void setTotal(Integer total) {
-        this.total = total;
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
     public CurrencyType getCurrency() {

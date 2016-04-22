@@ -1,5 +1,6 @@
 package cn.accessbright.blade.core;
 
+import cn.accessbright.blade.core.utils.Strings;
 import org.apache.commons.lang.StringUtils;
 
 import com.icitic.hrms.kq.util.KqDateTools;
@@ -58,7 +59,7 @@ public class PeriodTime implements Comparable {
 
 		if (Strings.equals(pre.endDate, post.startDate)) {
 			return SHANGWU.equals(pre.endTime) && XIAWU.equals(post.startTime);
-		} else if (Strings.equals(Tools.plusDay(pre.endDate, 1), post.startDate)) {
+		} else if (Strings.equals(KqPeriodTime.Tools.plusDay(pre.endDate, 1), post.startDate)) {
 			return XIAWU.equals(pre.endTime) && SHANGWU.equals(post.startTime);
 		}
 		return false;
@@ -114,7 +115,7 @@ public class PeriodTime implements Comparable {
 	 * 将起始时间增加一天
 	 */
 	protected void plusStartDateOneDay() {
-		startDate = Tools.plusDay(startDate, 1);
+		startDate = KqPeriodTime.Tools.plusDay(startDate, 1);
 	}
 
 	/**
@@ -201,10 +202,10 @@ public class PeriodTime implements Comparable {
 	 * @return
 	 */
 	public static PeriodTime getBetweenPeroid(String date1, String time1, String date2, String time2) {
-		String startDate = XIAWU.equals(time1) ? Tools.plusDay(date1, 1) : date1;
+		String startDate = XIAWU.equals(time1) ? KqPeriodTime.Tools.plusDay(date1, 1) : date1;
 		String startTime = XIAWU.equals(time1) ? SHANGWU : XIAWU;
 
-		String endDate = SHANGWU.equals(time2) ? Tools.minusDay(date2, 1) : date2;
+		String endDate = SHANGWU.equals(time2) ? KqPeriodTime.Tools.minusDay(date2, 1) : date2;
 		String endTime = SHANGWU.equals(time2) ? XIAWU : SHANGWU;
 		return new PeriodTime(startDate, startTime, endDate, endTime);
 	}
