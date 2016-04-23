@@ -1,5 +1,8 @@
 package cn.accessbright.blade.core.text;
 
+import cn.accessbright.blade.core.utils.Objects;
+import cn.accessbright.blade.core.utils.Strings;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,7 +14,7 @@ import java.util.regex.Pattern;
  * @author ll
  */
 public class TextFormatter {
-    public static Pattern PLACE_HOLDER_PATTERN = Pattern.compile("\\$\\{(\\w+)(?:\\:(\\w+)(?:\\:(.+))?)?\\}");
+    private static Pattern PLACE_HOLDER_PATTERN = Pattern.compile("\\$\\{(\\w+)(?:\\:(\\w+)(?:\\:(.+))?)?\\}");
 
     /**
      * 格式化给定的字符串
@@ -30,7 +33,7 @@ public class TextFormatter {
             String type = matcher.group(2);
             String param = matcher.group(3);
             String value = getValue(data, key, type, param);
-            matcher.appendReplacement(message, KqPeriodTime.Tools.filterNullToStr(value));
+            matcher.appendReplacement(message, Strings.nullToEmpty(value));
         }
         matcher.appendTail(message);
         return message.toString();
@@ -46,13 +49,13 @@ public class TextFormatter {
             Object retValue = data;
             TypeHandlerServiceLocator serviceLoactor = TypeHandlerServiceLocator.getInstance();
             for (int i = 0; i < props.length; i++) {
-                String propValue = KqPeriodTime.Tools.getPropText(retValue, props[i]);
+                String propValue = Objects.getPropText(retValue, props[i]);
                 String currentType = i > types.length - 1 ? null : types[i];
                 retValue = serviceLoactor.getHandler(currentType).handle(i == (props.length - 1) ? param : null, propValue);
             }
             return retValue.toString();
         } else {
-            String propValue = KqPeriodTime.Tools.getPropText(data, prop);
+            String propValue = Objects.getPropText(data, prop);
             TypeHandlerServiceLocator serviceLoactor = TypeHandlerServiceLocator.getInstance();
             return serviceLoactor.getHandler(type).handle(param, propValue).toString();
         }

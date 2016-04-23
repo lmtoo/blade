@@ -1,7 +1,7 @@
 package cn.accessbright.blade.core.event;
 
 import cn.accessbright.blade.core.utils.Strings;
-import cn.accessbright.blade.core.utils.collections.Collections;
+import cn.accessbright.blade.core.utils.collections.Arrays;
 
 import java.util.List;
 import java.util.Map;
@@ -46,7 +46,7 @@ public abstract class NotifyEvent extends SystemEvent {
     public boolean isValid() {
         if (source == null)
             return false;
-        if (Collections.isEmpty(ids))
+        if (Arrays.isEmpty(ids))
             return false;
         for (int i = 0; i < ids.length; i++) {
             if (Strings.isEmpty(ids[i]))

@@ -11,7 +11,7 @@ public class DoubleTypeHandler extends DefaultTypeHandler implements DataTypeHan
         int digits = NumberUtils.toInt(param, 0);
         String suffix = Strings.repeatChars(digits, '0');
         String format = "#,##0" + (suffix.length() > 0 ? ("." + suffix) : "");
-        String litral = KqPeriodTime.Tools.filterNullToStr(value);
+        String litral = Strings.toString(value);
         litral = litral.replaceAll(",", "");
         return new DecimalFormat(format).format(NumberUtils.toDouble(litral, 0));
     }

@@ -185,4 +185,8 @@ public abstract class Strings {
         }
         return str.toLowerCase();
     }
+
+    public static String nullToEmpty(String str) {
+        return str == null ? "" : str;
+    }
 }

@@ -16,16 +16,16 @@ public class DateTimeHandler implements DataTypeHandler {
         if (theDate != null) {
             return DateFormatUtils.format(theDate, pattern);
         }
-        return KqPeriodTime.Tools.filterNullToStr(value);
+        return Strings.toString(value);
     }
 
     private Date determineTheDate(Object value) {
         if (value instanceof Date)
             return (Date) value;
         if (value instanceof Long)
-            return new Date(((Long) value).longValue());
+            return new Date((Long) value);
         try {
-            return DateUtils.parseDate(KqPeriodTime.Tools.filterNullToStr(value), new String[]{"yyyy-MM", "yyyy-MM-dd", "yyyy-MM-dd hh:mm:ss"});
+            return DateUtils.parseDate(Strings.toString(value), new String[]{"yyyy-MM", "yyyy-MM-dd", "yyyy-MM-dd hh:mm:ss"});
         } catch (ParseException e) {
             e.printStackTrace();
         }
