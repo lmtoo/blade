@@ -1,10 +1,10 @@
 package cn.accessbright.blade.core.utils;
 
+import cn.accessbright.blade.core.utils.collections.Arrays;
 import cn.accessbright.blade.core.utils.collections.Collections;
 import cn.accessbright.blade.core.utils.collections.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -131,7 +131,7 @@ public abstract class Strings {
     }
 
     public static <T> String join(T[] coll, String separator) {
-        if (Collections.isEmpty(coll)) return "";
+        if (Arrays.isEmpty(coll)) return "";
         return join(Arrays.asList(coll), separator);
     }
 
@@ -170,5 +170,19 @@ public abstract class Strings {
 
     public static boolean isEmptyOrNumber(String[] numbers, int startIndex, int endIndex) {
         return findNonEmptyOrNumber(numbers, startIndex, endIndex) == -1;
+    }
+
+    public static String upperCase(final String str) {
+        if (str == null) {
+            return null;
+        }
+        return str.toUpperCase();
+    }
+
+    public static String lowerCase(final String str) {
+        if (str == null) {
+            return null;
+        }
+        return str.toLowerCase();
     }
 }

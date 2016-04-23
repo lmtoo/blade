@@ -1,11 +1,12 @@
 package cn.accessbright.blade.core.event;
 
+import org.springframework.context.ApplicationListener;
+
 /**
- * ������Դ�¼�������
+ * 系统事件监听器
  * 
  * @author ll
  * 
  */
-public interface EventListener extends java.util.EventListener {
-	void onEvent(DomainEvent event);
+public interface EventListener<T extends SystemEvent> extends ApplicationListener<T> {
 }

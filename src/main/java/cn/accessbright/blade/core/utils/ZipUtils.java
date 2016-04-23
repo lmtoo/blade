@@ -1,6 +1,5 @@
 package cn.accessbright.blade.core.utils;
 
-import cn.accessbright.blade.core.KqPeriodTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.FileCopyUtils;
@@ -63,7 +62,7 @@ public abstract class ZipUtils {
      * @return 生成的zip文件名称
      */
     public static final String zip(String inputPath, Map files, String outputPath, boolean useSourceExtension) {
-        String zipFileName = KqPeriodTime.Tools.getSysDate("yyyyMMddHHmmss") + new Random().nextInt(10000);
+        String zipFileName = Dates.current("yyyyMMddHHmmss") + new Random().nextInt(10000);
         return zip(inputPath, files, outputPath, zipFileName, useSourceExtension);
     }
 

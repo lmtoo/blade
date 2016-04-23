@@ -1,19 +1,24 @@
 package cn.accessbright.blade.core.utils;
 
-import cn.accessbright.blade.core.utils.RowDataMapper;
+import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.Assert;
 
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class ClassUtils {
-    public static List getMethodsByName(Class clazz, String methodName) {
+    public static List<Method> getMethodsByName(Class clazz, String methodName) {
         Assert.notNull(clazz, "Class must not be null");
         Assert.notNull(methodName, "Method name must not be null");
-        List methods = new ArrayList();
+        List<Method> methods = new ArrayList<>();
         Method[] allPublicMethods = clazz.getMethods();
         for (int i = 0; i < allPublicMethods.length; i++) {
             Method method = allPublicMethods[i];
@@ -55,5 +60,48 @@ public abstract class ClassUtils {
             if (!"class".equals(propName)) propNames.add(propDesc.getName());
         }
         return (String[]) propNames.toArray(new String[propNames.size()]);
+    }
+
+    public static boolean hasDefaultConstructor(Class clazz) {
+        try {
+            clazz.getDeclaredConstructor();
+            return true;
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static <T> T newDefaultInstance(Class<T> clazz) {
+        if (hasDefaultConstructor(clazz)) {
+            try {
+                Constructor<T> constructor = clazz.getDeclaredConstructor();
+                constructor.setAccessible(true);
+                return constructor.newInstance();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public static Map getPropNameMapper(Class clazz, boolean isKeyUppercase){
+        Map mapper=new HashMap();
+        PropertyDescriptor[] propDescs= PropertyUtils.getPropertyDescriptors(clazz);
+
+        for (int i = 0; i < propDescs.length; i++) {
+            PropertyDescriptor desc=propDescs[i];
+            String name=desc.getName();
+            String key=isKeyUppercase? StringUtils.upperCase(name):StringUtils.lowerCase(name);
+            mapper.put(key, name);
+        }
+
+        return mapper;
     }
 }

@@ -1,5 +1,7 @@
 package cn.accessbright.blade.core;
 
+import cn.accessbright.blade.core.utils.Strings;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -17,7 +19,7 @@ public class ListToMapResultCallBack extends QueryResultCallBack {
 
     public void read(int columIndex, String columnName, Object value) {
         String canonicalName = getCanonicalName(columnName);
-        rowData.put(canonicalName, KqPeriodTime.Tools.toString(value));
+        rowData.put(canonicalName, Strings.toString(value));
         if (columIndex == columnCount - 1) {//  到末尾列，则将列数据添加到List列表中
             data.add(rowData);
             rowData = new LinkedHashMap();

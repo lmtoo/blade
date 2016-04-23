@@ -1,19 +1,19 @@
 package cn.accessbright.blade.core.mail;
 
 /**
- * ֪ͨģ��
+ *通知模版
  * 
  * @author ll
  * 
  */
 public interface NotifyTemplate {
 	/**
-	 * Ĭ�ϵ�ģ��
+	 * 默认的模版
 	 */
 	String DEFAULT_TEMPLATE = "default";
 
 	/**
-	 * ����ģ��
+	 * 流程模版
 	 */
 	String JOB_TEMPLATE = "job";
 }

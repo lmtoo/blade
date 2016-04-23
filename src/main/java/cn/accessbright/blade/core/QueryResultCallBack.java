@@ -32,5 +32,4 @@ public abstract class QueryResultCallBack {
 	}
 
 	public abstract void read(int columIndex, String columnName, Object value);
-
 }

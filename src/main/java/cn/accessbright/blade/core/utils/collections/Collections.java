@@ -1,11 +1,12 @@
 package cn.accessbright.blade.core.utils.collections;
 
+import cn.accessbright.blade.core.utils.ClassUtils;
 import cn.accessbright.blade.core.utils.Objects;
-import cn.accessbright.blade.core.utils.Strings;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -15,46 +16,9 @@ import java.util.Map;
  */
 public class Collections {
 
-    public static <T> boolean isEmpty(T[] array) {
-        if (array == null) return true;
-        if (array.length == 0) return true;
-        return false;
-    }
-
-    public static boolean isEmpty(int[] array) {
-        if (array == null) return true;
-        if (array.length == 0) return true;
-        return false;
-    }
-
-    public static <T> boolean isAllNull(T[] array) {
-        boolean allNull = true;
-        for (int i = 0; i < array.length; i++) {
-            allNull = allNull && array[i] == null;
-        }
-        return allNull;
-    }
-
-    public static boolean isAllEmpty(String[] array) {
-        boolean allNull = true;
-        for (int i = 0; i < array.length; i++) {
-            allNull = allNull && Strings.isEmpty(array[i]);
-        }
-        return allNull;
-    }
-
-
     public static <T> boolean isEmpty(Collection<T> coll) {
         if (coll == null) return true;
         return coll.isEmpty();
-    }
-
-    public static boolean isNotEmpty(int[] coll) {
-        return !isEmpty(coll);
-    }
-
-    public static <T> boolean isNotEmpty(T[] coll) {
-        return !isEmpty(coll);
     }
 
     public static <T> boolean isNotEmpty(Collection<T> coll) {
@@ -76,7 +40,7 @@ public class Collections {
      * @return
      */
     public static <R, T> List<R> map(T[] coll, ObjectMapper<R, T> mapper) {
-        if (!isEmpty(coll)) {
+        if (!Arrays.isEmpty(coll)) {
             return map(java.util.Arrays.asList(coll), mapper);
         }
         return new ArrayList<R>();
@@ -123,7 +87,7 @@ public class Collections {
      * @return
      */
     public static <T> List<T> filter(T[] coll, ObjectFilter<T> filter) {
-        if (!Collections.isEmpty(coll)) {
+        if (!Arrays.isEmpty(coll)) {
             return reduce(java.util.Arrays.asList(coll), filter);
         }
         return java.util.Collections.emptyList();
@@ -224,7 +188,7 @@ public class Collections {
      * @return
      */
     public static <T> boolean contain(T[] coll, ObjectFilter<T> filter) {
-        if (isEmpty(coll)) return false;
+        if (Arrays.isEmpty(coll)) return false;
         for (int i = 0; i < coll.length; i++) {
             if (filter.isMatch(coll[i])) return true;
         }
@@ -267,7 +231,7 @@ public class Collections {
      * @return
      */
     public static <R, T> R forEach(T[] coll, ObjectCollector<R, T> collector) {
-        if (isEmpty(coll)) return null;
+        if (Arrays.isEmpty(coll)) return null;
         for (int i = 0; i < coll.length; i++) {
             collector.collect(coll[i]);
         }
@@ -309,7 +273,7 @@ public class Collections {
      * @return
      */
     public static <R, T> R mapReduce(T[] coll, MapReduce<R, T> mapReduce) {
-        if (!isEmpty(coll)) {
+        if (!Arrays.isEmpty(coll)) {
             return mapReduce(java.util.Arrays.asList(coll), mapReduce);
         }
         return null;
@@ -345,6 +309,77 @@ public class Collections {
                 result = mapReduce.reduce(result, mapped);
             } else {
                 result = mapped;
+            }
+        }
+        return result;
+    }
+
+
+    public <T> Map<String, T> findValueByPrefix(Map<String, T> params, String prefix) {
+        Map data = new HashMap();
+        Iterator<String> iter = params.keySet().iterator();
+        while (iter.hasNext()) {
+            String key = iter.next();
+            if (key.startsWith(prefix)) {
+                data.put(key.substring(prefix.length()), params.get(key));
+            }
+        }
+        return data;
+    }
+
+
+    /**
+     * 根据参数前缀和属性名称创建对象
+     *
+     * @param params      所有的参数
+     * @param targetClass 要创建的对象类型
+     * @param prefix      参数前缀
+     * @param propNames   要创建对象的属性名称
+     * @return
+     */
+    public static <T> T buildObjectByPrefix(Map<String, Object> params, Class<T> targetClass, String prefix, String[] propNames) {
+        if (!ClassUtils.hasDefaultConstructor(targetClass)) return null;
+
+        String keyPrefix = prefix + ".";
+        Object[] propValues = new Object[propNames.length];
+        for (int i = 0; i < propNames.length; i++) {
+            propValues[i] = params.get(keyPrefix + propNames[i]);
+        }
+
+        T target = null;
+        if (!Arrays.isAllNull(propValues)) {
+            target = ClassUtils.newDefaultInstance(targetClass);
+            if (target == null) return null;
+            for (int i = 0; i < propNames.length; i++) {
+                if (propValues[i] != null) {
+                    Objects.setPropValue(target, propNames[i], propValues[i]);
+                }
+            }
+        }
+        return target;
+    }
+
+
+    public static <E, K, V> Map<K, V> toMap(Collection<E> coll, String key, String value) {
+        Map<K, V> result = new HashMap<>();
+        if (Collections.isNotEmpty(coll)) {
+            Iterator<E> iter = coll.iterator();
+            while (iter.hasNext()) {
+                E item = iter.next();
+                result.put(Objects.getPropertyValue(item, key), Objects.getPropertyValue(item, value));
+            }
+        }
+        return result;
+    }
+
+
+    public static <K, E> Map<K, E> toMap(Collection<E> coll, String key) {
+        Map<K, E> result = new HashMap<>();
+        if (Collections.isNotEmpty(coll)) {
+            Iterator<E> iter = coll.iterator();
+            while (iter.hasNext()) {
+                E item = iter.next();
+                result.put(Objects.getPropertyValue(item, key), item);
             }
         }
         return result;

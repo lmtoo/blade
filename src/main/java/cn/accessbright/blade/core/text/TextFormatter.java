@@ -1,8 +1,5 @@
 package cn.accessbright.blade.core.text;
 
-import cn.accessbright.blade.core.KqPeriodTime;
-import cn.accessbright.blade.core.text.typehandler.TypeHandlerServiceLocator;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

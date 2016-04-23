@@ -3,7 +3,7 @@ package cn.accessbright.blade.core.event;
 import java.util.List;
 
 /**
- * �Ӽ���Ϣ��ֱ�ӷ��ͣ�����ϵͳƫ��������
+ *加急消息，直接发送，不管系统偏移量参数
  * 
  * @author ll
  * 

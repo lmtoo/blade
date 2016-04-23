@@ -10,10 +10,10 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 
 /**
- * �ʼ�����
- * 
+ * 邮件工厂
+ *
  * @author ll
- * 
+ *
  */
 public class MailMessageFactory {
 
@@ -26,17 +26,17 @@ public class MailMessageFactory {
 	}
 
 	/**
-	 * ���ݲ��������ʼ�����
-	 * 
+	 * 根据参数创建邮件对象
+	 *
 	 * @param subject
-	 *            �ʼ�����
+	 *            邮件主题
 	 * @param content
-	 *            �ʼ�����
+	 *            邮件内容
 	 * @param to
-	 *            �ʼ����յ�ַ�����ʼ������û���
+	 *            邮件接收地址或者邮件接收用户名
 	 * @param sendDate
-	 *            ����ʱ��
-	 * @return �ʼ�����
+	 *            发送时间
+	 * @return 邮件对象
 	 */
 	public static SimpleMailMessage createSimpleMailMessage(Object subject, Object content, String[] to, Date sendDate) {
 		MailConfiguration config = MailConfiguration.getInstance();

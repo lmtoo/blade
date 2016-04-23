@@ -38,7 +38,7 @@ public class MapToArrayResultCallBack extends QueryResultCallBack {
             data.put(theKeyValue, theValue);
         }
         if (theValue != null) {
-            theValue[columIndex] = KqPeriodTime.Tools.toString(value);
+            theValue[columIndex] = Strings.toString(value);
         }
     }
 

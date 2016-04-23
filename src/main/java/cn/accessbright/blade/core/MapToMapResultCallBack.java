@@ -7,9 +7,10 @@ import java.util.Map;
 
 /**
  * 将查询结果处理为 Map--> key(主键):String; value(数据行): Map->key(列名);value(单元格值) <br>
+ * 注意：查询语句中的key，必须在第一位
  *
  * @author ll
- * @see 注意：查询语句中的key，必须在第一位
+ * @see
  */
 public class MapToMapResultCallBack extends QueryResultCallBack {
     private String keyColumnName;
@@ -38,7 +39,7 @@ public class MapToMapResultCallBack extends QueryResultCallBack {
             data.put(theKeyValue, theValue);
         }
         if (theValue != null) {
-            theValue.put(getCanonicalName(columnName), KqPeriodTime.Tools.toString(value));
+            theValue.put(getCanonicalName(columnName), Strings.toString(value));
         }
     }
 

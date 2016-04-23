@@ -1,5 +1,9 @@
 package cn.accessbright.blade.core;
 
+import cn.accessbright.blade.core.utils.ClassUtils;
+import cn.accessbright.blade.core.utils.Objects;
+import cn.accessbright.blade.core.utils.Strings;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,13 +27,12 @@ public class ListToObjectResultCallBack extends QueryResultCallBack {
     public ListToObjectResultCallBack(Class clazz) {
         this.clazz = clazz;
         rowData = newTarget();
-        propertyMapper = KqPeriodTime.Tools.getPropNameMapper(clazz, true);
+        propertyMapper = ClassUtils.getPropNameMapper(clazz, true);
     }
 
     public void read(int columIndex, String columnName, Object value) {
         String colName = getCanonicalName(columnName);
-
-        KqPeriodTime.Tools.setPropValue(rowData, (String) propertyMapper.get(colName), KqPeriodTime.Tools.toString(value));
+        Objects.setPropValue(rowData, (String) propertyMapper.get(colName), Strings.toString(value));
         if (columIndex == columnCount - 1) {// 到末尾列，则将数据对象添加到List列表中
             data.add(rowData);
             rowData = newTarget();

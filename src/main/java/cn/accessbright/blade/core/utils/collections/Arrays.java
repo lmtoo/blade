@@ -1,25 +1,102 @@
 package cn.accessbright.blade.core.utils.collections;
 
+import cn.accessbright.blade.core.utils.IteratorEnumeration;
+import cn.accessbright.blade.core.utils.Strings;
+
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Administrator on 2016/4/19.
  */
 public class Arrays {
 
-    public static boolean contain(String[] coll, String item) {
+    public static <T> List<T> asList(T... array){
+        return java.util.Arrays.asList(array);
+    }
+
+    public static <T> boolean isEmpty(T[] array) {
+        if (array == null) return true;
+        if (array.length == 0) return true;
+        return false;
+    }
+
+    public static boolean isEmpty(int[] array) {
+        if (array == null) return true;
+        if (array.length == 0) return true;
+        return false;
+    }
+
+
+    public static boolean isNotEmpty(int[] coll) {
+        return !isEmpty(coll);
+    }
+
+    public static <T> boolean isNotEmpty(T[] coll) {
+        return !isEmpty(coll);
+    }
+
+    public static boolean isAllEmpty(String[] array) {
+        for (int i = 0; i < array.length; i++) {
+            if (Strings.isNotEmpty(array[i])) return false;
+        }
+        return true;
+    }
+
+
+    public static <T> boolean isAllNull(T[] array) {
+        boolean allNull = true;
+        for (int i = 0; i < array.length; i++) {
+            allNull = allNull && array[i] == null;
+        }
+        return allNull;
+    }
+
+    public static <T> boolean contain(T[] coll, T item) {
         return java.util.Arrays.asList(coll).contains(item);
     }
 
-    public static boolean notIn(String[] coll, String item) {
+    public static <T> boolean notIn(T[] coll, T item) {
         return !contain(coll, item);
     }
 
-    public static boolean containAll(String[] coll, String[] items) {
+    public static <T> boolean containAll(T[] coll, T[] items) {
         return java.util.Arrays.asList(coll).containsAll(java.util.Arrays.asList(items));
+    }
+
+    public static int[] toPrimitive(final Integer[] array) {
+        if (array == null) {
+            return null;
+        } else if (array.length == 0) {
+            return new int[0];
+        }
+        final int[] result = new int[array.length];
+        for (int i = 0; i < array.length; i++) {
+            result[i] = array[i].intValue();
+        }
+        return result;
+    }
+
+    public static Integer[] toObject(final int[] array) {
+        if (array == null) {
+            return null;
+        } else if (array.length == 0) {
+            return new Integer[0];
+        }
+        final Integer[] result = new Integer[array.length];
+        for (int i = 0; i < array.length; i++) {
+            result[i] = Integer.valueOf(array[i]);
+        }
+        return result;
     }
 
     public static <T> T[] singleton(T target) {
@@ -157,4 +234,38 @@ public class Arrays {
     public static List<String[]> paddingLeft(List<String[]> listArray, String item) {
         return padding(listArray, 0, true, new String[]{item});
     }
+
+
+    /**
+     * 查找指定参数名称前缀的集合大小
+     *
+     * @param names
+     * @param paramPrefix
+     * @return
+     */
+    public static int getSizeByPrefix(Enumeration<String> names, String paramPrefix) {
+        Pattern pattern = Pattern.compile("^" + paramPrefix + "\\[(\\d+?)\\]\\.\\w+$");
+        int size = 0;
+        while (names.hasMoreElements()) {
+            Matcher matcher = pattern.matcher(names.nextElement());
+            if (matcher.find()) {
+                String index = matcher.group(1);
+                size = Math.max(size, Integer.parseInt(index) + 1);
+            }
+        }
+        return size;
+    }
+
+    /**
+     * 查找指定参数名称前缀的集合大小
+     *
+     * @param names
+     * @param paramPrefix
+     * @return
+     */
+    public static int getSizeByPrefix(Iterator<String> names, String paramPrefix) {
+        return getSizeByPrefix(new IteratorEnumeration<String>(names), paramPrefix);
+    }
+
+
 }

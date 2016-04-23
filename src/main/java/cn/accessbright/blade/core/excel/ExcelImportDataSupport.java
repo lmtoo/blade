@@ -1,8 +1,7 @@
 package cn.accessbright.blade.core.excel;
 
-import cn.accessbright.blade.core.utils.collections.Pair;
-import cn.accessbright.blade.core.event.EventPublisher;
 import cn.accessbright.blade.core.utils.RowValidateRules;
+import cn.accessbright.blade.core.utils.collections.Pair;
 
 import java.util.List;
 import java.util.Map;
@@ -16,7 +15,7 @@ import java.util.Map;
  *
  * @author ll
  */
-public interface ExcelImportDataSupport extends EventPublisher {
+public interface ExcelImportDataSupport {
     /**
      * 获取导入页面的title和备注
      *

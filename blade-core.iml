@@ -128,11 +128,22 @@
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-mongodb:1.8.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:2.13.3" level="project" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.8.2" level="project" />
-    <orderEntry type="library" name="Maven: com.google.code.kaptcha:kaptcha:jdk15:2.3" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.velocity:velocity:1.7" level="project" />
+    <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.2" level="project" />
+    <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.4" level="project" />
+    <orderEntry type="library" name="Maven: javax.mail:javax.mail-api:1.5.5" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi:3.14" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.10" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml:3.14" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml-schemas:3.14" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.xmlbeans:xmlbeans:2.6.0" level="project" />
+    <orderEntry type="library" name="Maven: stax:stax-api:1.0.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.virtuald:curvesapi:1.03" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.kaptcha:kaptcha:jdk15:2.3" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.4" level="project" />
+    <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.9.2" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:webjars-locator:0.28" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:webjars-locator-core:0.27" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.4" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-compress:1.9" level="project" />
     <orderEntry type="library" name="Maven: org.webjars.npm:validate.js:0.8.0" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:jquery:2.2.2" level="project" />

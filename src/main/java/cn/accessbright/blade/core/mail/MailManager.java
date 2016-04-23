@@ -1,85 +1,63 @@
 package cn.accessbright.blade.core.mail;
 
+import cn.accessbright.blade.core.utils.collections.Collections;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Transaction;
+public class MailManager {
+    private String pattern = "yyyy-MM-dd hh:mm:ss";
+    private EntityManager entityManager;
 
-import com.icitic.hrms.common.dao.GenericDAO;
-import com.icitic.hrms.common.exception.HrmsException;
-import com.icitic.hrms.common.manager.GenericManager;
-import com.icitic.hrms.util.Tools;
+    private MailEventListener mailEventListener;
 
-public class MailManager extends GenericManager {
-	private GenericDAO dao;
-	private String pattern = "yyyy-MM-dd hh:mm:ss";
+    /**
+     * 保存消息记录
+     *
+     * @param records
+     */
+    public void saveMailRecord(List records) {
+        if (!Collections.isNotEmpty(records)) {
+            for (int i = 0; i < records.size(); i++) {
+                NotifyRecord record = (NotifyRecord) records.get(i);
+                Query query = entityManager.createQuery("from NotifyRecord n where n.status='" + NotifyRecord.STATUS_NOT_SEND + "' and n.jobId='" + record.getJobId() + "'");
+                List notifyList = query.getResultList();
+                if (Collections.isNotEmpty(notifyList)) {
+                    for (int j = 0; j < notifyList.size(); j++) {
+                        NotifyRecord recorded = (NotifyRecord) notifyList.get(j);
+                        recorded.cancel();
+                        entityManager.persist(recorded);
+                    }
+                }
+                entityManager.persist(record);
+            }
+        }
+    }
 
-	public MailManager() throws HrmsException {
-		dao = new GenericDAO(s);
-	}
+    /**
+     * 通知发送消息
+     *
+     * @param now
+     */
 
-	/**
-	 * ������Ϣ��¼
-	 * 
-	 * @param records
-	 * @throws HrmsException
-	 */
-	public void saveMailRecord(List records) throws HrmsException {
-		if (!Tools.isEmpty(records)) {
-			Transaction tx = null;
-			try {
-				tx = this.beginTransaction();
-				for (int i = 0; i < records.size(); i++) {
-					NotifyRecord record = (NotifyRecord) records.get(i);
-					
-					List notifyList = dao.find("from NotifyRecord n where n.status='" + NotifyRecord.STATUS_NOT_SEND + "' and n.jobId='"+record.getJobId()+"'");
-					if (!Tools.isEmpty(notifyList)) {
-						for (int j = 0; j < notifyList.size(); j++) {
-							NotifyRecord recorded = (NotifyRecord) notifyList.get(j);
-							recorded.cancel();
-							dao.saveOrUpdate(recorded);
-						}
-					}
-					dao.createBo(record);
-				}
-				this.commitTransaction(tx);
-			} catch (Exception e) {
-				this.rollbackTransaction(tx);
-				throw new HrmsException("�½��ʼ���ʷ��¼ʧ��", e, this.getClass());
-			}
-		}
-	}
+    public void send(Date now) {
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
 
-	/**
-	 * ֪ͨ������Ϣ
-	 * 
-	 * @param now
-	 * @throws HrmsException
-	 */
-	public void send(Date now) throws HrmsException {
-		Transaction tx = null;
-		try {
-			tx = this.beginTransaction();
-			SimpleDateFormat format = new SimpleDateFormat(pattern);
+        String hql = "from NotifyRecord n where n.status='" + NotifyRecord.STATUS_NOT_SEND
+                + "' and to_char(n.sendDate,'" + pattern + "')<='" + format.format(now) + "' "
+                + " order by n.sendDate asc";
 
-			String hql = "from NotifyRecord n where n.status='" + NotifyRecord.STATUS_NOT_SEND 
-					+ "' and to_char(n.sendDate,'" + pattern + "')<='"+ format.format(now) + "' "
-					+ " order by n.sendDate asc";
-			List records = dao.find(hql);
-			if (!Tools.isEmpty(records)) {
-
-				for (int i = 0; i < records.size(); i++) {
-					NotifyRecord record = (NotifyRecord) records.get(i);
-					MailEventListener.getInstance().sendEmail(record);
-					dao.updateBo(record);
-				}
-
-			}
-			this.commitTransaction(tx);
-		} catch (Exception e) {
-			this.rollbackTransaction(tx);
-			throw new HrmsException("�½��ʼ���ʷ��¼ʧ��", e, this.getClass());
-		}
-	}
+        Query query = entityManager.createQuery(hql);
+        List records = query.getResultList();
+        if (Collections.isNotEmpty(records)) {
+            for (int i = 0; i < records.size(); i++) {
+                NotifyRecord record = (NotifyRecord) records.get(i);
+                mailEventListener.sendEmail(record);
+                entityManager.persist(record);
+            }
+        }
+    }
 }

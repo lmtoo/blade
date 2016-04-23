@@ -47,6 +47,10 @@ public class Objects {
         return null;
     }
 
+    public static <T,P> P getPropertyValue(T target,String property){
+        return (P)getPropValue(target,property);
+    }
+
 
     /**
      * 获取map的值，并忽略大小写
@@ -75,6 +79,7 @@ public class Objects {
     }
 
     /**
+     * 未考虑到属性值与目标属性类型不一致的问题<br>
      * 设置对象或者map的属性，并忽略map的key的大小写
      *
      * @param target
@@ -321,5 +326,4 @@ public class Objects {
         if (o1 == null || o2 == null) return false;
         return o1.equals(o2);
     }
-
 }

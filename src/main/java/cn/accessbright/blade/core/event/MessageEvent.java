@@ -1,13 +1,11 @@
 package cn.accessbright.blade.core.event;
 
 import cn.accessbright.blade.core.utils.Strings;
-import com.icitic.hrms.common.exception.HrmsException;
-import com.icitic.hrms.util.Tools;
 
 /**
  * @author ll
  */
-public class MessageEvent extends DomainEvent {
+public class MessageEvent extends SystemEvent {
     private String message;
 
     public MessageEvent(Object source) {
@@ -15,12 +13,12 @@ public class MessageEvent extends DomainEvent {
     }
 
     public MessageEvent(Object source, String message) {
-        super(source);
+        this(source);
         this.message = message;
     }
 
     public boolean isValid() {
-        return !Strings.isEmpty(message) && (source instanceof Exception);
+        return Strings.isNotEmpty(message) && !(source instanceof Exception);
     }
 
     public String getMessage() {
