@@ -14,7 +14,7 @@ import org.springframework.data.repository.query.Param;
 import cn.accessbright.blade.domain.system.Role;
 import cn.accessbright.blade.domain.system.User;
 
-public interface UserRepository extends JpaRepository<User, Integer>,JpaSpecificationExecutor<User> {
+public interface UserRepository extends JpaRepository<User, Integer>,JpaSpecificationExecutor<User>,UserRepositoryCustom {
 	/**
 	 * 根据凭证查找用户，凭证包括用户名、邮箱、电话
 	 * 

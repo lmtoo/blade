@@ -41,10 +41,15 @@ public class UserController {
     }
 
     @RequestMapping("/update")
-    public User update(@ModelAttribute("users") User user,String phone) {
+    public User update(@ModelAttribute("users") User user, String phone) {
         user.setPhone(phone);
         userService.update(user);
         return user;
+    }
+
+    @RequestMapping("/findId")
+    public Integer findIdByUsername(String username) {
+        return userService.findIdByUsername(username);
     }
 
 }

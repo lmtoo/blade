@@ -1,6 +1,5 @@
 package cn.accessbright.blade.core.mail;
 
-import cn.accessbright.blade.core.event.DomainEvent;
 import cn.accessbright.blade.core.event.EventListener;
 import cn.accessbright.blade.core.event.NotifyEvent;
 import cn.accessbright.blade.core.event.UrgentNotifyEvent;
@@ -9,7 +8,6 @@ import cn.accessbright.blade.core.utils.collections.Collections;
 import cn.accessbright.blade.core.utils.collections.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessagePreparator;

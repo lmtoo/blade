@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import cn.accessbright.blade.core.utils.Numbers;
 import cn.accessbright.blade.core.utils.Strings;
 import org.apache.poi.hssf.usermodel.HSSFDataFormat;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -80,7 +81,7 @@ public class POITools {
 		if(align!= ExcelRow.TEXT_ALIGN_ORIGNAL){
 			cell.setCellStyle(cellFormats[align]);
 		}
-		cell.setCellValue(KqPeriodTime.Tools.filterNullToStr(value));
+		cell.setCellValue(Strings.toString(value));
 	}
 
 	public void addString(Sheet sheet, int column, int row, Object value, int align) {
@@ -109,7 +110,7 @@ public class POITools {
 	public String getValue(Sheet sheet, int column, int row,int scale) {
 		Cell cell = getCell(sheet, row, column);
 		if(Cell.CELL_TYPE_NUMERIC==cell.getCellType())
-			return KqPeriodTime.Tools.toNumberString(cell.getNumericCellValue(), scale);
+			return Numbers.toNumberString(cell.getNumericCellValue(), scale);
 		else if(Cell.CELL_TYPE_BOOLEAN==cell.getCellType())
 			return cell.getBooleanCellValue()?"1":"0";
 		else if(Cell.CELL_TYPE_BLANK==cell.getCellType())
@@ -205,7 +206,7 @@ public class POITools {
 	}
 
 	public void addNumber(Sheet sheet, int column, int row, String value, int digits) {
-		addNumber(sheet, column, row, Double.parseDouble(KqPeriodTime.Tools.filterNullToZero(value)), digits);
+		addNumber(sheet, column, row, Double.parseDouble(Numbers.toNumberString(value)), digits);
 	}
 
 	public void margeString(Sheet sheet, int startColumn, int startRow, int endColumn, int endRow, String value) {
@@ -221,7 +222,7 @@ public class POITools {
 		if(align!=ExcelRow.TEXT_ALIGN_ORIGNAL){
 			cell.setCellStyle(cellFormats[align]);
 		}
-		cell.setCellValue(KqPeriodTime.Tools.filterNullToStr(value));
+		cell.setCellValue(Strings.toString(value));
 
 		CellRangeAddress address = new CellRangeAddress(startRow, endRow, startColumn, endColumn);
 		sheet.addMergedRegion(address);

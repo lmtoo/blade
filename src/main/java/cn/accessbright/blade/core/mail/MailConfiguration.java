@@ -2,8 +2,6 @@ package cn.accessbright.blade.core.mail;
 
 import java.util.Properties;
 
-import com.icitic.hrms.cache.SysCacheTool;
-import org.springframework.context.annotation.PropertySource;
 
 public class MailConfiguration {
 	private static MailConfiguration INSTANCE;
@@ -15,11 +13,6 @@ public class MailConfiguration {
 	private String auth;
 
 	private MailConfiguration() {
-		username = SysCacheTool.getSysParameter("MAIL_HR_USERNAME");
-		password = SysCacheTool.getSysParameter("MAIL_HR_PASSWORD");
-		address = SysCacheTool.getSysParameter("MAIL_HR_ADDRESS");
-		smtpHost = SysCacheTool.getSysParameter("MAIL_SMTP_HOST");
-		auth = SysCacheTool.getSysParameter("MAIL_SMTP_AUTH");
 	}
 
 	public String getUsername() {

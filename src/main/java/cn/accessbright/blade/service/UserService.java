@@ -90,7 +90,7 @@ public class UserService extends ApplicationService {
 
 	/**
 	 * 修改密码
-	 * 
+	 *
 	 * @param request
 	 */
 	@Transactional
@@ -110,5 +110,9 @@ public class UserService extends ApplicationService {
 		user.setPassword(encodedPassword);
 		userRepository.save(user);
 		eventPublisher.publishEvent(new PasswordChangedEvent(user));
+	}
+
+	public Integer findIdByUsername(String username) {
+		return userRepository.findIdByUsername(username);
 	}
 }

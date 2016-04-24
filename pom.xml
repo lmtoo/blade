@@ -50,6 +50,12 @@
             <artifactId>spring-boot-actuator</artifactId>
         </dependency>
 
+        <!--shell 远程监控-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-remote-shell</artifactId>
+        </dependency>
+
         <!--websocket-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -228,6 +234,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -242,6 +251,11 @@
                     <artifactId>jdbc-driver</artifactId>
                     <version>10.2.0.4.0</version>
                 </dependency>
+                <!--<dependency>-->
+                <!--<groupId>org.springframework</groupId>-->
+                <!--<artifactId>springloaded</artifactId>-->
+                <!--<version>1.2.6.RELEASE</version>-->
+                <!--</dependency>-->
             </dependencies>
         </profile>
     </profiles>
